@@ -108,15 +108,10 @@ def transfer_item(from_inventory, to_inventory, item_name, quantity):
     
     from_inventory[item_name]['quantity'] -= quantity
     
-    if item_name in to_inventory:
-        to_inventory[item_name]['quantity'] += quantity
-    else:
-        new_item = dict()
-        for key, value in from_inventory[item_name].items():
-            new_item.update({key: value})
-        new_item['quantity'] = quantity
-        to_inventory.update({item_name: new_item})
-    
+    if item_name not in to_inventory:
+        to_inventory[item_name] = dict(from_inventory[item_name])
+    to_inventory[item_name]['quantity'] = quantity
+
     return True
 
 
@@ -179,22 +174,22 @@ def main():
     print()
     
     print("=== Inventory Analytics ===")
-    
+
     alice_new_value = calculate_inventory_value(alice_inventory)
     bob_value = calculate_inventory_value(bob_inventory)
     alice_new_items = count_items(alice_inventory)
     bob_items = count_items(bob_inventory)
-    
+
     if alice_new_value > bob_value:
         print(f"Most valuable player: Alice ({alice_new_value} gold)")
     else:
         print(f"Most valuable player: Bob ({bob_value} gold)")
-    
+
     if alice_new_items > bob_items:
         print(f"Most items: Alice ({alice_new_items} items)")
     else:
         print(f"Most items: Bob ({bob_items} items)")
-    
+
     rare_items = []
     for item_name, details in alice_inventory.items():
         if details.get('rarity') == 'rare':
