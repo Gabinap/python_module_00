@@ -1,4 +1,19 @@
+"""
+Data Quest - Data Archivist
+Exercise 0: Ancient Text Recovery
 
+This module demonstrates basic file reading operations for recovering
+data from ancient archives. Showcases file opening, reading, error
+handling, and proper file closing.
+
+Functions:
+    main: Read and display contents from ancient_fragment.txt
+
+Author:
+    gagulhon (@École 42)
+Version:
+    1.0 (2025-01-11)
+"""
 
 def main():
     try:

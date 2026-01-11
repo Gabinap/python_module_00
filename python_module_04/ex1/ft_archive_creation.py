@@ -1,3 +1,20 @@
+"""
+Data Quest - Data Archivist
+Exercise 1: Archive Creation
+
+This module demonstrates basic file writing operations for creating
+new archive entries. Showcases file creation, writing, error
+handling, and proper file closing.
+
+Functions:
+    main: Create new_discovery.txt and write archive entries
+
+Author:
+    gagulhon (@École 42)
+Version:
+    1.0 (2025-01-11)
+"""
+
 def main():
     """
     Simulates the creation of a new archive file in a cyber archive system.

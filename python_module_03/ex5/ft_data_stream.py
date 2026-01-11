@@ -6,7 +6,7 @@ expressions, and compares streaming vs storing approaches.
 
 Functions:
     game_event_stream: Generate game events on-demand
-    filter_events: Filter events based on criteria
+    filter_high_level: Filter events for high-level players
     fibonacci_generator: Generate Fibonacci sequence
     prime_generator: Generate prime numbers
     main: Demonstrate streaming data processing with generators
@@ -14,8 +14,10 @@ Functions:
 Author:
     gagulhon (@École 42)
 Version:
-    1.0 (2025-01-05)
+    1.0 (2025-01-11)
 """
+
+import time
 
 
 def game_event_stream(count):
@@ -31,74 +33,70 @@ def game_event_stream(count):
     Examples:
         >>> gen = game_event_stream(3)
         >>> next(gen)
-        {'player': 'alice', 'level': 5, 'action': 'killed monster'}
+        {'event_id': 1, 'player': 'alice', 'level': 5, 'action': 'killed monster'}
     """
     players = ['alice', 'bob', 'charlie', 'diana']
     actions = ['killed monster', 'found treasure', 'leveled up', 'completed quest']
     
     for i in range(count):
-        player = players[i % len(players)]
-        level = (i % 15) + 1
-        action = actions[i % len(actions)]
+        player_index = i % len(players)
+        action_index = i % len(actions)
+        level = ((i * 7) % 20) + 1
         
         event = {
-            'id': i + 1,
-            'player': player,
+            'event_id': i + 1,
+            'player': players[player_index],
             'level': level,
-            'action': action
+            'action': actions[action_index]
         }
+        
         yield event
 
 
-def filter_events(event_generator, min_level):
+def filter_high_level(event_stream, min_level):
     """
-    Filter events to only include high-level players.
+    Filter event stream for high-level players.
     
     Args:
-        event_generator: Generator producing events
+        event_stream: Generator yielding events
         min_level: Minimum level threshold
         
     Yields:
-        dict: Filtered event dictionaries
+        dict: Filtered events with level >= min_level
     """
-    for event in event_generator:
+    for event in event_stream:
         if event['level'] >= min_level:
             yield event
 
 
-def fibonacci_generator(limit):
+def fibonacci_generator(count):
     """
-    Generate Fibonacci sequence up to limit numbers.
+    Generate Fibonacci sequence.
     
     Args:
-        limit: Number of Fibonacci numbers to generate
+        count: Number of Fibonacci numbers to generate
         
     Yields:
         int: Next Fibonacci number
-        
-    Examples:
-        >>> gen = fibonacci_generator(5)
-        >>> list(gen)
-        [0, 1, 1, 2, 3]
     """
     a = 0
     b = 1
-    count = 0
-
-    while count < limit:
+    generated = 0
+    
+    while generated < count:
         yield a
-        a_temp = a
+        temp = a
         a = b
-        b = a_temp + b
-        count += 1
+        b = temp + b
+        generated += 1
 
 
-def prime_generator(limit):
+def prime_generator(count):
     """
-    Generate prime numbers up to limit primes.
+    Generate prime numbers.
     
     Args:
-        limit: Number of prime numbers to generate
+        count: Number of primes to generate
         
     Yields:
         int: Next prime number
@@ -106,13 +104,15 @@ def prime_generator(limit):
     primes_found = 0
     candidate = 2
     
-    while primes_found < limit:
+    while primes_found < count:
         is_prime = True
         
-        for i in range(2, candidate):
-            if candidate % i == 0:
+        test_divisor = 2
+        while test_divisor < candidate:
+            if candidate % test_divisor == 0:
                 is_prime = False
                 break
+            test_divisor += 1
         
         if is_prime:
             yield candidate
@@ -125,8 +125,8 @@ def main():
     """
     Demonstrate streaming data processing with generators.
     
-    Showcases generator creation, iteration, filtering, and memory
-    efficiency compared to storing all data in lists.
+    Showcases yield, next(), iter(), for loops, and memory-efficient
+    processing of large datasets without storing everything in memory.
     
     Returns:
         None: Prints streaming demonstrations directly to stdout
@@ -138,26 +138,36 @@ def main():
     print(f"Processing {total_events} game events...")
     print()
     
-    event_gen = game_event_stream(total_events)
+    event_stream = game_event_stream(total_events)
+    event_iterator = iter(event_stream)
     
-    displayed_count = 0
-    for event in event_gen:
-        if displayed_count < 3:
-            print(f"Event {event['id']}: Player {event['player']} "
-                  f"(level {event['level']}) {event['action']}")
-            displayed_count += 1
+    event1 = next(event_iterator)
+    print(f"Event {event1['event_id']}: Player {event1['player']} "
+          f"(level {event1['level']}) {event1['action']}")
+    
+    event2 = next(event_iterator)
+    print(f"Event {event2['event_id']}: Player {event2['player']} "
+          f"(level {event2['level']}) {event2['action']}")
+    
+    event3 = next(event_iterator)
+    print(f"Event {event3['event_id']}: Player {event3['player']} "
+          f"(level {event3['level']}) {event3['action']}")
+    
     print("...")
     print()
     
     print("=== Stream Analytics ===")
     
-    event_gen = game_event_stream(total_events)
+    start_time = time.time()
+    
+    analytics_stream = game_event_stream(total_events)
+    
     total_processed = 0
     high_level_count = 0
     treasure_count = 0
     levelup_count = 0
     
-    for event in event_gen:
+    for event in analytics_stream:
         total_processed += 1
         
         if event['level'] >= 10:
@@ -169,35 +179,58 @@ def main():
         if event['action'] == 'leveled up':
             levelup_count += 1
     
+    end_time = time.time()
+    processing_time = end_time - start_time
+    
     print(f"Total events processed: {total_processed}")
     print(f"High-level players (10+): {high_level_count}")
     print(f"Treasure events: {treasure_count}")
     print(f"Level-up events: {levelup_count}")
     print("Memory usage: Constant (streaming)")
-    print("Processing time: 0.045 seconds")
+    print(f"Processing time: {processing_time:.3f} seconds")
     print()
     
     print("=== Generator Demonstration ===")
     
-    fib_gen = fibonacci_generator(10)
-    fib_list = []
-    for i in range(10):
-        fib_list.append(next(fib_gen))
-    
-    fib_str = ", ".join([str(n) for n in fib_list])
-    print(f"Fibonacci sequence (first 10): {fib_str}")
-    
-    prime_gen = prime_generator(5)
-    prime_list = []
+    fib_stream = fibonacci_generator(10)
+    fib_numbers = []
+
     while True:
         try:
-            prime = next(prime_gen)
+            fib_num = next(fib_stream)
+            fib_numbers.append(str(fib_num))
         except StopIteration:
             break
-        prime_list.append(prime)
+
+    fib_output = ", ".join(fib_numbers)
     
-    prime_str = ", ".join([str(p) for p in prime_list])
-    print(f"Prime numbers (first 5): {prime_str}")
+    print(f"Fibonacci sequence (first {len(fib_numbers)}): {fib_output}")
+    
+    prime_stream = prime_generator(5)
+    prime_iterator = iter(prime_stream)
+    
+    prime_numbers = []
+    prime1 = next(prime_iterator)
+    prime_numbers.append(prime1)
+    
+    prime2 = next(prime_iterator)
+    prime_numbers.append(prime2)
+    
+    prime3 = next(prime_iterator)
+    prime_numbers.append(prime3)
+    
+    prime4 = next(prime_iterator)
+    prime_numbers.append(prime4)
+    
+    prime5 = next(prime_iterator)
+    prime_numbers.append(prime5)
+    
+    prime_strings = []
+    for prime in prime_numbers:
+        prime_strings.append(str(prime))
+    prime_output = ", ".join(prime_strings)
+    
+    print(f"Prime numbers (first {len(prime_numbers)}): {prime_output}")
 
 
 if __name__ == "__main__":
