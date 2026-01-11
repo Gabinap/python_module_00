@@ -15,15 +15,16 @@ Version:
     1.0 (2025-01-05)
 """
 
+import sys
 import math
 
 
 def calculate_distance(pos1, pos2):
     """
     Calculate the 3D Euclidean distance between two positions.
-
+    
     Uses the formula: sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
-
+    
     Args:
         pos1: Tuple of (x, y, z) coordinates for first position
         pos2: Tuple of (x, y, z) coordinates for second position

@@ -15,7 +15,6 @@ Version:
     1.0 (2025-01-11)
 """
 
-
 def main():
     try:
         print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
@@ -43,7 +42,6 @@ def main():
         print("Error: Insufficient memory to complete the operation.")
     except Exception as e:
         print(f"Error: {e}")
-
 
 if __name__ == "__main__":
     main()

@@ -2,7 +2,6 @@ class Plant:
     """
     Represent a plant with its characteristics
     """
-
     def __init__(self, name: str, height: int, age: int) -> None:
         """
         Initialize a new plant

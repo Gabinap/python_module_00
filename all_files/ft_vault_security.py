@@ -27,19 +27,19 @@ def main():
     print("Initiating secure vault access...")
     print("Vault connection established with failsafe protocols")
     print()
-
+    
     print("SECURE EXTRACTION:")
     with open("classified_data.txt", "r") as vault:
         data = vault.read()
         print(f"[CLASSIFIED] {data.strip()}")
-
+    
     print()
-
+    
     print("SECURE PRESERVATION:")
     with open("security_log.txt", "w") as vault:
         vault.write("[CLASSIFIED] New security protocols archived\n")
         print("[CLASSIFIED] New security protocols archived")
-
+    
     print("Vault automatically sealed upon completion")
     print()
     print("All vault operations completed with maximum security.")

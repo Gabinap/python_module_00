@@ -22,7 +22,6 @@ class Plant:
     Represents a plant with basic attributes.
     Base class for all plant types in the garden system.
     """
-
     def __init__(self, name: str, height: int = 0,
                  age: int = 0) -> None:
         """
@@ -51,7 +50,6 @@ class FloweringPlant(Plant):
     A flowering plant with color and blooming capability.
     Inherits from Plant and adds flower-specific features.
     """
-
     def __init__(self, name: str, height: int, age: int,
                  color: str) -> None:
         """
@@ -88,7 +86,6 @@ class PrizeFlower(FloweringPlant):
     A prize-winning flower with competition points.
     Inherits from FloweringPlant and adds exhibition features.
     """
-
     def __init__(self, name: str, height: int, age: int,
                  color: str, prize_points: int = 0) -> None:
         """
@@ -145,7 +142,6 @@ class Garden:
     Represents an individual garden with plants.
     Manages a collection of plants and tracks garden statistics.
     """
-
     def __init__(self, name: str) -> None:
         """
         Initialize a new garden.
@@ -231,7 +227,6 @@ class GardenManager:
         Nested class for calculating garden statistics.
         Provides analytical functions for garden data.
         """
-
         def __init__(self, gardens: dict) -> None:
             """
             Initialize statistics calculator.

@@ -64,12 +64,7 @@ def main():
         if count == 1:
             achievement_counts.add(achievement)
 
-    rare = (
-        alice_achievements.difference(bob_achievements, charlie_achievements) |
-        bob_achievements.difference(alice_achievements, charlie_achievements) |
-        charlie_achievements.difference(alice_achievements, bob_achievements)
-    )
-    print(f"Rare achievements (1 player): {rare}")
+    print(f"Rare achievements (1 player): {alice_achievements.difference(bob_achievements, charlie_achievements) | bob_achievements.difference(alice_achievements, charlie_achievements) | charlie_achievements.difference(alice_achievements, bob_achievements)}")
     print()
 
     alice_bob_common = alice_achievements.intersection(bob_achievements)

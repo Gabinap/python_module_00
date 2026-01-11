@@ -19,17 +19,17 @@ import sys
 def ft_score_analytics():
     """
     Process player scores from command-line arguments and display analytics.
-
+    
     Reads scores from sys.argv, converts them to integers, and calculates
     comprehensive statistics including total, average, high score, low score,
     and score range. Invalid inputs are gracefully skipped with warnings.
-
+    
     The function uses lists to store and process scores, demonstrating basic
     list operations and built-in functions for statistical analysis.
-
+    
     Returns:
         None: Prints analytics directly to stdout
-
+        
     Examples:
         $ python3 ft_score_analytics.py 1500 2300 1800 2100 1950
         === Player Score Analytics ===
@@ -47,7 +47,7 @@ def ft_score_analytics():
 
     if len(user_args) == 0:
         print("No scores provided. Usage: python3 ft_score_analytics.py"
-              " <score1> <score2> ...")
+                " <score1> <score2> ...")
         return
 
     scores = []

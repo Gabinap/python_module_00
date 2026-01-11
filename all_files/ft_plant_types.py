@@ -5,7 +5,6 @@ class Plant:
     Protects plant data from corruption by validating all inputs
     and rejecting negative values for height and age.
     """
-
     def __init__(self, name: str, height: int = 0, age: int = 0) -> None:
         """
         Initialize a new secure plant with validated data.

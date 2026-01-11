@@ -4,11 +4,11 @@ def ft_garden_intro() -> None:
     height = 42
     age = 4200
     print(
-        "=== Welcome to My Garden ===\n"
-        f"Plant: {name}\n"
-        f"Height: {height} meters\n"
-        f"Age: {age} years\n\n"
-        "=== End of Program ==="
+            "=== Welcome to My Garden ===\n"
+            f"Plant: {name}\n"
+            f"Height: {height} meters\n"
+            f"Age: {age} years\n\n"
+            "=== End of Program ==="
     )
 
 

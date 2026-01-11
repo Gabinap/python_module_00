@@ -23,10 +23,10 @@ def crisis_handler(archive_name):
     Generic crisis handler for archive operations.
     Attempts to access an archive and handles all potential failures
     gracefully using secure protocols.
-
+    
     Args:
         archive_name (str): Name of the archive to access
-
+        
     Returns:
         tuple: (success: bool, message: str, status: str)
     """
@@ -38,35 +38,35 @@ def crisis_handler(archive_name):
                 f"Archive recovered - \"{content}\"",
                 "Normal operations resumed"
             )
-
+            
     except FileNotFoundError:
         return (
             False,
             "Archive not found in storage matrix",
             "Crisis handled, system stable"
         )
-
+        
     except PermissionError:
         return (
             False,
             "Security protocols deny access",
             "Crisis handled, security maintained"
         )
-
+        
     except IsADirectoryError:
         return (
             False,
             "Target is a directory, not an archive",
             "Crisis handled, system stable"
         )
-
+        
     except OSError as e:
         return (
             False,
             f"System error: {e.strerror}",
             "Crisis handled, system recovering"
         )
-
+        
     except Exception as e:
         return (
             False,
@@ -82,26 +82,26 @@ def main():
     """
     print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===")
     print()
-
+    
     test_scenarios = [
         ("lost_archive.txt", "CRISIS ALERT"),
         ("classified_vault.txt", "CRISIS ALERT"),
         ("standard_archive.txt", "ROUTINE ACCESS")
     ]
-
+    
     for archive, alert_type in test_scenarios:
         print(f"{alert_type}: Attempting access to '{archive}'...")
-
+        
         success, message, status = crisis_handler(archive)
-
+        
         if success:
             print(f"SUCCESS: {message}")
         else:
             print(f"RESPONSE: {message}")
-
+        
         print(f"STATUS: {status}")
         print()
-
+    
     print("All crisis scenarios handled successfully. Archives secure.")
 
 

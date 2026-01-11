@@ -57,14 +57,14 @@ if __name__ == "__main__":
 
     bamboo = Plant("Wallah", 89, 3000, 3000000)
     print(
-        f"Created: {bamboo.name} ({bamboo.height}cm, "
-        f"{bamboo.plant_age} days)"
+            f"Created: {bamboo.name} ({bamboo.height}cm, "
+            f"{bamboo.plant_age} days)"
     )
 
     orange = Plant("feliation")
     print(
-        f"Created: {orange.name} ({orange.height}cm, "
-        f"{orange.plant_age} days)"
+            f"Created: {orange.name} ({orange.height}cm, "
+            f"{orange.plant_age} days)"
     )
 
     poire = Plant("Rose")

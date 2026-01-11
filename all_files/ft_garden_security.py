@@ -5,7 +5,6 @@ class SecurePlant:
     Protects plant data from corruption by validating all inputs
     and rejecting negative values for height and age.
     """
-
     def __init__(self, name: str, height: int = 0, age: int = 0) -> None:
         self.name = name
         self.height = height if height >= 0 else 0
@@ -17,9 +16,9 @@ class SecurePlant:
 
         Args:
             name: Name of the plant
-            height: Initial height in cm (defaults to 0, negative values set to 0)
-            height: Initial height in days (defaults to 0,
-                                            negative values set to 0)
+            height: Initial height in cm (defaults to 0, negative values
+                    set to 0)
+            height: Initial height in days (defaults to 0, negative values set to 0)
         """
         if height < 0:
             print(f"Invalid operation attempted {self.height} [REJECTED]")
