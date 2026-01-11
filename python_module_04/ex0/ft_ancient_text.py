@@ -23,7 +23,7 @@ def main():
         file = open("ancient_fragment.txt", "r")
         print("connection established...")
         print()
-        print("RECOVERDED DATA:")
+        print("RECOVERED DATA:")
         for line in file:
             print(line, end="")
         file.close()

@@ -29,6 +29,7 @@ def main():
         print("Storage unit created successfully...")
         print()
 
+        print("Inscribing preservation data...")
         entries = [
             "[ENTRY 001] New quantum algorithm discovered",
             "[ENTRY 002] Efficiency increased by 347%",

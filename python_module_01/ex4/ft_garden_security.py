@@ -18,11 +18,11 @@ class SecurePlant:
             name: Name of the plant
             height: Initial height in cm (defaults to 0, negative values
                     set to 0)
-            age: Initial age in days (defaults to 0, negative values set to 0)
+            height: Initial height in days (defaults to 0, negative values set to 0)
         """
         if height < 0:
             print(f"Invalid operation attempted {self.height} [REJECTED]")
-            print("Security: Negative age rejected")
+            print("Security: Negative height rejected")
         else:
             self.height = height
             print(f"Height update: {self.height}cm [OK]")
@@ -39,7 +39,7 @@ class SecurePlant:
         """
         if age < 0:
             print(f"Invalid operation attempted {self.age} [REJECTED]")
-            print("Security: Negative height rejected")
+            print("Security: Negative age rejected")
         else:
             self.age = age
             print(f"Age update: {self.age} days [OK]")
