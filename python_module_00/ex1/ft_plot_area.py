@@ -5,6 +5,7 @@ def ft_plot_area() -> None:
     Prompts user for length and width, validates input,
     and displays the calculated area.
     """
+
     def get_positive_int(prompt: str) -> int:
         """
         Get a positive integer from user input.
@@ -24,6 +25,7 @@ def ft_plot_area() -> None:
                 return value
             except ValueError:
                 print("Invalid input, please enter a number")
+
     x = get_positive_int("Enter length: ")
     y = get_positive_int("Enter width: ")
     print(f"Plot area: {x * y}")

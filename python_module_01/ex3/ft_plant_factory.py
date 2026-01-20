@@ -3,8 +3,13 @@ class Plant:
     Represent a plant with its characteristics
     """
 
-    def __init__(self, name: str, height: int = 0, plant_age: int = 0,
-                 grow_step: int = 1) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: int = 0,
+        plant_age: int = 0,
+        grow_step: int = 1,
+    ) -> None:
         """
         Initialize a new plant
 
@@ -57,17 +62,18 @@ if __name__ == "__main__":
 
     bamboo = Plant("Wallah", 89, 3000, 3000000)
     print(
-        f"Created: {bamboo.name} ({bamboo.height}cm, "
-        f"{bamboo.plant_age} days)"
+        f"Created: {bamboo.name} ({bamboo.height}cm, {bamboo.plant_age} days)"
     )
 
     orange = Plant("feliation")
     print(
-        f"Created: {orange.name} ({orange.height}cm, "
-        f"{orange.plant_age} days)"
+        f"Created: {orange.name} ({orange.height}cm, {orange.plant_age} days)"
     )
 
     poire = Plant("Rose")
     print(f"Created: {poire.name} ({poire.height}cm, {poire.plant_age} days)")
+
     poire = Plant("Amandier", 2, 44)
     print(f"Created: {poire.name} ({poire.height}cm, {poire.plant_age} days)")
+
+    print("Total plant created: 5")

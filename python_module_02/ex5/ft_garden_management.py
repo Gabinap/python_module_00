@@ -66,9 +66,9 @@ class GardenManager:
             raise PlantError("Plant name cannot be empty!")
 
         self.plants[name] = {
-            'water': water_need,
-            'sun': sun_need,
-            'healthy': True
+            "water": water_need,
+            "sun": sun_need,
+            "healthy": True,
         }
         print(f"Added {name} successfully")
 
@@ -108,8 +108,8 @@ class GardenManager:
             raise PlantError(f"Plant '{plant_name}' not found in garden")
 
         plant = self.plants[plant_name]
-        water = plant['water']
-        sun = plant['sun']
+        water = plant["water"]
+        sun = plant["sun"]
 
         if water < 1 or water > 10:
             raise ValueError(f"Water level {water} is too high (max 10)")
@@ -126,8 +126,10 @@ class GardenManager:
         Returns:
             str: Status message with plant count and water level
         """
-        return (f"Garden has {len(self.plants)} plants, "
-                f"water tank: {self.water_tank}%")
+        return (
+            f"Garden has {len(self.plants)} plants, "
+            f"water tank: {self.water_tank}%"
+        )
 
 
 def test_garden_management():

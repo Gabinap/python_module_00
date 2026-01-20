@@ -12,8 +12,8 @@ def ft_garden_summary() -> None:
                 print("Please enter a name.")
                 continue
             break
-        except ValueError:
-            print("Value error, please enter a valid name.")
+        except Exception as e:
+            print(f"Error: {e}")
 
     while True:
         try:

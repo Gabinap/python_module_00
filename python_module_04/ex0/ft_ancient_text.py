@@ -17,11 +17,17 @@ Version:
 
 
 def main():
+    """
+    Read and display contents from 'ancient_fragment.txt'.
+
+    Attempts to open and print the file contents. Handles common file
+    access errors and reports user-friendly messages.
+    """
     try:
         print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
         print()
         print("Accessing Storage Vault: ancient\\_fragment.txt")
-        file = open("ancient_fragment.txt", "r")
+        file = open("ancient_fragment.txt")
         print("connection established...")
         print()
         print("RECOVERED DATA:")

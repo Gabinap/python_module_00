@@ -7,22 +7,26 @@ class SecurePlant:
     """
 
     def __init__(self, name: str, height: int = 0, age: int = 0) -> None:
+        """
+        Initialize SecurePlant with validated name, height and age.
+
+        Negative values for height and age are converted to 0.
+        """
         self.name = name
         self.height = height if height >= 0 else 0
         self.age = age if age >= 0 else 0
 
-    def set_height(self, height: int) -> int:
+    def set_height(self, height: int) -> None:
         """
         Initialize a new secure plant with validated data.
 
         Args:
             name: Name of the plant
-            height: Initial height in cm (defaults to 0, negative values set to 0)
-            height: Initial height in days (defaults to 0,
-                                            negative values set to 0)
+            height: Initial height in cm (defaults to 0). Negative values
+                are set to 0.
         """
         if height < 0:
-            print(f"Invalid operation attempted {self.height} [REJECTED]")
+            print(f"Invalid operation attempted {height} [REJECTED]")
             print("Security: Negative height rejected")
         else:
             self.height = height
@@ -39,7 +43,7 @@ class SecurePlant:
             Rejects negative values and prints an error message
         """
         if age < 0:
-            print(f"Invalid operation attempted {self.age} [REJECTED]")
+            print(f"Invalid operation attempted {age} [REJECTED]")
             print("Security: Negative age rejected")
         else:
             self.age = age
@@ -70,7 +74,6 @@ if __name__ == "__main__":
     """
     several tests
     """
-
     print("=== Garden Security System ===")
     plant = SecurePlant("Rose")
     print(f"Plant created: {plant.name}")

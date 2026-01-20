@@ -3,8 +3,9 @@ class Plant:
     Represent a plant with its characteristics
     """
 
-    def __init__(self, name: str, height: int, plant_age: int,
-                 grow_step: int = 1) -> None:
+    def __init__(
+        self, name: str, height: int, plant_age: int, grow_step: int = 1
+    ) -> None:
         """
         Initialize a new plant
 
@@ -43,11 +44,12 @@ if __name__ == "__main__":
     """
     make a plant growth by 30 days
     """
-
-    bamboo = Plant("Bamboo", 43, 22, 5)
+    basic_height = 43
+    bamboo = Plant("Bamboo", basic_height, 22, 5)
     print("=== Day 1 ===")
     bamboo.get_info()
-    for i in range(30):
+    for _i in range(30):
         bamboo.age()
     print("=== Day 31 ===")
     bamboo.get_info()
+    print(f"Growth this month: {bamboo.height - basic_height}")

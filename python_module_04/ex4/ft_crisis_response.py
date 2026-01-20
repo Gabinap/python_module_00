@@ -8,7 +8,8 @@ types of archive access failures using try/except combined with the
 with statement to prevent data corruption.
 
 Functions:
-    crisis_handler: Generic function to handle archive access with error management
+    crisis_handler: Generic function to handle archive access
+        with error management
     main: Test crisis response with various archive scenarios
 
 Author:
@@ -31,47 +32,47 @@ def crisis_handler(archive_name):
         tuple: (success: bool, message: str, status: str)
     """
     try:
-        with open(archive_name, "r") as vault:
+        with open(archive_name) as vault:
             content = vault.read().strip()
             return (
                 True,
-                f"Archive recovered - \"{content}\"",
-                "Normal operations resumed"
+                f'Archive recovered - "{content}"',
+                "Normal operations resumed",
             )
 
     except FileNotFoundError:
         return (
             False,
             "Archive not found in storage matrix",
-            "Crisis handled, system stable"
+            "Crisis handled, system stable",
         )
 
     except PermissionError:
         return (
             False,
             "Security protocols deny access",
-            "Crisis handled, security maintained"
+            "Crisis handled, security maintained",
         )
 
     except IsADirectoryError:
         return (
             False,
             "Target is a directory, not an archive",
-            "Crisis handled, system stable"
+            "Crisis handled, system stable",
         )
 
     except OSError as e:
         return (
             False,
             f"System error: {e.strerror}",
-            "Crisis handled, system recovering"
+            "Crisis handled, system recovering",
         )
 
     except Exception as e:
         return (
             False,
             f"Unexpected anomaly: {type(e).__name__}",
-            "Crisis handled, diagnostics complete"
+            "Crisis handled, diagnostics complete",
         )
 
 
@@ -86,7 +87,7 @@ def main():
     test_scenarios = [
         ("lost_archive.txt", "CRISIS ALERT"),
         ("classified_vault.txt", "CRISIS ALERT"),
-        ("standard_archive.txt", "ROUTINE ACCESS")
+        ("standard_archive.txt", "ROUTINE ACCESS"),
     ]
 
     for archive, alert_type in test_scenarios:

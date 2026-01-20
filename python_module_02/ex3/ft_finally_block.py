@@ -53,7 +53,6 @@ def test_watering_system():
 
     print("Testing with error...")
     water_plants(["tomato", None, "carrots"])
-    print("Watering completed successfully!")
     print()
 
     print("Cleanup always happens, even with errors!")

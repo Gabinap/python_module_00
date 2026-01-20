@@ -98,8 +98,10 @@ class Flower(Plant):
         """
         Display complete flower information including color.
         """
-        print(f"{self.name}: {self.height}cm, {self.age} days old, "
-              f"{self.color} color")
+        print(
+            f"{self.name}: {self.height}cm, {self.age} days old, "
+            f"{self.color} color"
+        )
 
 
 class Tree(Plant):
@@ -107,8 +109,9 @@ class Tree(Plant):
     A tree with trunk diameter and shade production capability.
     """
 
-    def __init__(self, name: str, height: int, age: int,
-                 trunk_diameter: int) -> None:
+    def __init__(
+        self, name: str, height: int, age: int, trunk_diameter: int
+    ) -> None:
         """
         Initialize a tree with Plant attributes and trunk diameter.
 
@@ -132,8 +135,10 @@ class Tree(Plant):
         """
         Display complete tree information including trunk diameter.
         """
-        print(f"{self.name}: {self.height}cm, {self.age} days old, "
-              f"{self.trunk_diameter}cm diameter")
+        print(
+            f"{self.name}: {self.height}cm, {self.age} days old, "
+            f"{self.trunk_diameter}cm diameter"
+        )
 
 
 class Vegetable(Plant):
@@ -141,8 +146,14 @@ class Vegetable(Plant):
     A vegetable with harvest season and nutritional value.
     """
 
-    def __init__(self, name: str, height: int, age: int,
-                 harvest_season: str, nutritional_value: str) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: int,
+        age: int,
+        harvest_season: str,
+        nutritional_value: str,
+    ) -> None:
         """
         Initialize a vegetable with Plant attributes and nutrition info.
 
@@ -167,8 +178,10 @@ class Vegetable(Plant):
         """
         Display complete vegetable information.
         """
-        print(f"{self.name}: {self.height}cm, {self.age} days old, "
-              f"{self.harvest_season}")
+        print(
+            f"{self.name}: {self.height}cm, {self.age} days old, "
+            f"{self.harvest_season}"
+        )
 
 
 if __name__ == "__main__":

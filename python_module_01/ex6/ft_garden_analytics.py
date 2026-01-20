@@ -23,8 +23,7 @@ class Plant:
     Base class for all plant types in the garden system.
     """
 
-    def __init__(self, name: str, height: int = 0,
-                 age: int = 0) -> None:
+    def __init__(self, name: str, height: int = 0, age: int = 0) -> None:
         """
         Initialize a new plant.
         Args:
@@ -52,8 +51,7 @@ class FloweringPlant(Plant):
     Inherits from Plant and adds flower-specific features.
     """
 
-    def __init__(self, name: str, height: int, age: int,
-                 color: str) -> None:
+    def __init__(self, name: str, height: int, age: int, color: str) -> None:
         """
         Initialize a flowering plant.
         Args:
@@ -79,8 +77,10 @@ class FloweringPlant(Plant):
     def get_data(self) -> None:
         """Display complete flower information including color."""
         status = "blooming" if self.blooming else "not blooming"
-        print(f"- {self.name}: {self.height}cm, {self.age} days, {self.color} "
-              f"flowers ({status})")
+        print(
+            f"- {self.name}: {self.height}cm, {self.age} days, {self.color} "
+            f"flowers ({status})"
+        )
 
 
 class PrizeFlower(FloweringPlant):
@@ -89,8 +89,14 @@ class PrizeFlower(FloweringPlant):
     Inherits from FloweringPlant and adds exhibition features.
     """
 
-    def __init__(self, name: str, height: int, age: int,
-                 color: str, prize_points: int = 0) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: int,
+        age: int,
+        color: str,
+        prize_points: int = 0,
+    ) -> None:
         """
         Initialize a prize flower.
         Args:
@@ -104,8 +110,9 @@ class PrizeFlower(FloweringPlant):
         self.prize_points = prize_points
         self.awards = []
 
-    def earn_prize_points(self, points: int,
-                          reason: str = "exhibition") -> None:
+    def earn_prize_points(
+        self, points: int, reason: str = "exhibition"
+    ) -> None:
         """
         Award competition points to the flower.
         Args:
@@ -114,8 +121,7 @@ class PrizeFlower(FloweringPlant):
         """
         self.prize_points += points
         self.awards.append(reason)
-        print(f"{self.name} earned {points} prize points "
-              f"for {reason}!")
+        print(f"{self.name} earned {points} prize points for {reason}!")
 
     def get_exhibition_info(self) -> str:
         """
@@ -124,8 +130,10 @@ class PrizeFlower(FloweringPlant):
             Formatted string with flower exhibition details
         """
         status = "blooming" if self.blooming else "not blooming"
-        return (f"- {self.name}: {self.height}cm, {self.color} "
-                f"flowers ({status}), Prize points: {self.prize_points}")
+        return (
+            f"- {self.name}: {self.height}cm, {self.color} "
+            f"flowers ({status}), Prize points: {self.prize_points}"
+        )
 
     def is_prize_worthy(self) -> bool:
         """
@@ -173,7 +181,7 @@ class Garden:
         for plant in self.plants:
             initial_height = plant.height
             plant.grow()
-            self.total_growth += (plant.height - initial_height)
+            self.total_growth += plant.height - initial_height
 
     def calculate_score(self) -> int:
         """
@@ -190,11 +198,7 @@ class Garden:
             Dictionary with counts for regular, flowering,
             and prize plants
         """
-        counts = {
-            "regular": 0,
-            "flowering": 0,
-            "prize": 0
-        }
+        counts = {"regular": 0, "flowering": 0, "prize": 0}
         for plant in self.plants:
             if isinstance(plant, PrizeFlower):
                 counts["prize"] += 1
@@ -211,11 +215,15 @@ class Garden:
         for plant in self.plants:
             plant.get_data()
         counts = self.get_plant_types_count()
-        print(f"\nPlants added: {self.plants_added}, "
-              f"Total growth: {self.total_growth}cm")
-        print(f"Plant types: {counts['regular']} regular, "
-              f"{counts['flowering']} flowering, "
-              f"{counts['prize']} prize flowers")
+        print(
+            f"\nPlants added: {self.plants_added}, "
+            f"Total growth: {self.total_growth}cm"
+        )
+        print(
+            f"Plant types: {counts['regular']} regular, "
+            f"{counts['flowering']} flowering, "
+            f"{counts['prize']} prize flowers"
+        )
 
 
 class GardenManager:
@@ -224,6 +232,7 @@ class GardenManager:
     Provides class-level and static utility methods for
     garden management.
     """
+
     total_gardens_created = 0
 
     class GardenStats:
@@ -292,8 +301,7 @@ class GardenManager:
         self.gardens[garden_name] = garden
         return garden
 
-    def add_plant_to_garden(self, garden_name: str,
-                            plant: Plant) -> None:
+    def add_plant_to_garden(self, garden_name: str, plant: Plant) -> None:
         """
         Add a plant to a specific garden.
         Args:
@@ -308,8 +316,7 @@ class GardenManager:
         """Display scores for all managed gardens."""
         stats = self.GardenStats(self.gardens)
         scores = stats.get_all_scores()
-        score_items = [f"{name}: {score}"
-                       for name, score in scores.items()]
+        score_items = [f"{name}: {score}" for name, score in scores.items()]
         score_str = ", ".join(score_items)
         print(f"Garden scores - {score_str}")
 
@@ -419,8 +426,10 @@ if __name__ == "__main__":
     # Test static methods
     print("\n=== Validation Tests ===")
     print(f"Height 450cm valid: {GardenManager.validate_height(450)}")
-    print(f"Name 'Nepenthes rajah' valid: "
-          f"{GardenManager.is_valid_plant_name('Nepenthes rajah')}")
+    print(
+        f"Name 'Nepenthes rajah' valid: "
+        f"{GardenManager.is_valid_plant_name('Nepenthes rajah')}"
+    )
 
     # Display analytics
     print("\n=== Global Analytics ===")

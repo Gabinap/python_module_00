@@ -5,6 +5,7 @@ def ft_harvest_total() -> None:
     Prompts user for harvest amounts for days 1, 2, and 3,
     validates input, and displays the total.
     """
+
     def ask(nb: int) -> int:
         """
         Ask for harvest amount for a specific day.

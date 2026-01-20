@@ -46,8 +46,10 @@ def ft_score_analytics():
     print("=== Player Score Analytics ===")
 
     if len(user_args) == 0:
-        print("No scores provided. Usage: python3 ft_score_analytics.py"
-              " <score1> <score2> ...")
+        print(
+            "No scores provided. Usage: python3 ft_score_analytics.py"
+            " <score1> <score2> ..."
+        )
         return
 
     scores = []
@@ -68,6 +70,7 @@ def ft_score_analytics():
     print(f"High score: {max(scores)}")
     print(f"Low score: {min(scores)}")
     print(f"Score range: {max(scores) - min(scores)}")
+    print()
 
 
 if __name__ == "__main__":

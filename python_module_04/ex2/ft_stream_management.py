@@ -33,10 +33,12 @@ def main():
     print()
 
     sys.stdout.write(
-        f"[STANDARD] Archive status from {archivist_id}: {status_report}\n")
+        f"[STANDARD] Archive status from {archivist_id}: {status_report}\n"
+    )
 
     sys.stderr.write(
-        "[ALERT] System diagnostic: Communication channels verified\n")
+        "[ALERT] System diagnostic: Communication channels verified\n"
+    )
 
     sys.stdout.write("[STANDARD] Data transmission complete\n")
     print()

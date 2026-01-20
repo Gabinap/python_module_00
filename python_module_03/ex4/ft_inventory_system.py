@@ -29,7 +29,7 @@ def calculate_inventory_value(inventory):
         int: Total gold value of all items
 
     Examples:
-        >>> inv = {'sword': {'quantity': 1, 'value': 500}}
+        >>> inv = {"sword": {"quantity": 1, "value": 500}}
         >>> calculate_inventory_value(inv)
         500
     """
@@ -52,7 +52,7 @@ def count_items(inventory):
         int: Total count of all items
 
     Examples:
-        >>> inv = {'sword': {'quantity': 1}, 'potion': {'quantity': 5}}
+        >>> inv = {"sword": {"quantity": 1}, "potion": {"quantity": 5}}
         >>> count_items(inv)
         6
     """
@@ -73,11 +73,11 @@ def categorize_items(inventory):
         dict: Dictionary mapping categories to item counts
 
     Examples:
-        >>> inv = {'sword': {'category': 'weapon', 'quantity': 1}}
+        >>> inv = {"sword": {"category": "weapon", "quantity": 1}}
         >>> categorize_items(inv)
         {'weapon': 1}
     """
-    categories = dict()
+    categories = {}
     for item_details in inventory.values():
         category = item_details.get("category", "unknown")
         quantity = item_details.get("quantity", 0)
@@ -128,30 +128,28 @@ def main():
     print("=== Player Inventory System ===")
     print()
 
-    alice_inventory = dict(
-        {
-            "sword": {
-                "quantity": 1,
-                "value": 500,
-                "category": "weapon",
-                "rarity": "rare",
-            },
-            "potion": {
-                "quantity": 5,
-                "value": 50,
-                "category": "consumable",
-                "rarity": "common",
-            },
-            "shield": {
-                "quantity": 1,
-                "value": 200,
-                "category": "armor",
-                "rarity": "uncommon",
-            },
-        }
-    )
+    alice_inventory = {
+        "sword": {
+            "quantity": 1,
+            "value": 500,
+            "category": "weapon",
+            "rarity": "rare",
+        },
+        "potion": {
+            "quantity": 5,
+            "value": 50,
+            "category": "consumable",
+            "rarity": "common",
+        },
+        "shield": {
+            "quantity": 1,
+            "value": 200,
+            "category": "armor",
+            "rarity": "uncommon",
+        },
+    }
 
-    bob_inventory = dict()
+    bob_inventory = {}
 
     print("=== Alice's Inventory ===")
     for item_name, details in alice_inventory.items():
@@ -161,7 +159,7 @@ def main():
         rarity = details.get("rarity")
         item_value = quantity * value
         print(
-            f"{item_name} ({category}, {rarity}): {quantity}x @"
+            f"{item_name} ({category}, {rarity}): {quantity}x @ "
             f"{value} gold each = {item_value} gold"
         )
 
@@ -187,8 +185,8 @@ def main():
     print()
 
     print("=== Updated Inventories ===")
-    alice_potions = alice_inventory.get("potion", dict()).get("quantity", 0)
-    bob_potions = bob_inventory.get("potion", dict()).get("quantity", 0)
+    alice_potions = alice_inventory.get("potion", {}).get("quantity", 0)
+    bob_potions = bob_inventory.get("potion", {}).get("quantity", 0)
     print(f"Alice potions: {alice_potions}")
     print(f"Bob potions: {bob_potions}")
     print()
@@ -216,10 +214,6 @@ def main():
             rare_items.append(item_name)
 
     print(f"Rarest items: {', '.join(rare_items)}")
-
-    my_string = "This is a very long string that exceeds the 79 character limit and needs to be split"
-
-    print(f"{my_string}")
 
 
 if __name__ == "__main__":

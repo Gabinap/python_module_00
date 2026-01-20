@@ -42,13 +42,13 @@ def test_temperature_input():
     """
     print("=== Garden Temperature Checker ===\n")
     print("Testing temperature: 25")
-    check_temperature('25')
+    check_temperature("25")
     print("\nTesting temperature: abc")
-    check_temperature('abc')
+    check_temperature("abc")
     print("\nTesting temperature: 100")
-    check_temperature('100')
+    check_temperature("100")
     print("\nTesting temperature: -50")
-    check_temperature('-50')
+    check_temperature("-50")
     print("\nAll tests completed - program didn't crash!")
 
 

@@ -20,7 +20,8 @@ def main():
     """
     Simulates the creation of a new archive file in a cyber archive system.
     It writes predefined entries to a new file and handles potential errors.
-    exceptions handled include PermissionError, OSError, MemoryError, and a general Exception catch-all.
+    Exceptions handled include PermissionError, OSError, and MemoryError.
+    A general Exception catch-all is also present.
     """
     try:
         print("=== CYBER ARCHIVES - PRESERVATION SYSTEM ===")
@@ -34,7 +35,7 @@ def main():
         entries = [
             "[ENTRY 001] New quantum algorithm discovered",
             "[ENTRY 002] Efficiency increased by 347%",
-            "[ENTRY 003] Archived by Data Archivist trainee"
+            "[ENTRY 003] Archived by Data Archivist trainee",
         ]
         for entry in entries:
             file.write(entry + "\n")

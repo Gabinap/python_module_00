@@ -10,12 +10,9 @@ def ft_seed_inventory(plant: str, number: int, unit_type: str) -> None:
     messages = {
         "packets": f"{plant.capitalize()} seeds: {number} packets available",
         "grams": f"{plant.capitalize()} seeds: {number} grams total",
-        "area": f"{plant.capitalize()} seeds: covers {number} square meters"
+        "area": f"{plant.capitalize()} seeds: covers {number} square meters",
     }
 
-    message = messages.get(
-        unit_type,
-        f"{plant.capitalize()} seeds: {number} {unit_type}"
-    )
+    message = messages.get(unit_type, "Unknown unit type")
 
     print(message)

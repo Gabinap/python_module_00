@@ -33,14 +33,20 @@ def game_event_stream(count):
     Examples:
         >>> gen = game_event_stream(3)
         >>> next(gen)
-        {'event_id': 1, 'player': 'alice', 'level': 5, 'action': 'killed monster'}
+        {
+            'event_id': 1,
+            'player': 'alice',
+            'level': 5,
+            'action': 'killed monster',
+        }
     """
-    players = ['alice', 'bob', 'charlie', 'diana']
+    players = ["alice", "bob", "charlie", "diana"]
     actions = [
-        'killed monster',
-        'found treasure',
-        'leveled up',
-        'completed quest']
+        "killed monster",
+        "found treasure",
+        "leveled up",
+        "completed quest",
+    ]
 
     for i in range(count):
         player_index = i % len(players)
@@ -48,10 +54,10 @@ def game_event_stream(count):
         level = ((i * 7) % 20) + 1
 
         event = {
-            'event_id': i + 1,
-            'player': players[player_index],
-            'level': level,
-            'action': actions[action_index]
+            "event_id": i + 1,
+            "player": players[player_index],
+            "level": level,
+            "action": actions[action_index],
         }
 
         yield event
@@ -69,7 +75,7 @@ def filter_high_level(event_stream, min_level):
         dict: Filtered events with level >= min_level
     """
     for event in event_stream:
-        if event['level'] >= min_level:
+        if event["level"] >= min_level:
             yield event
 
 
@@ -146,16 +152,22 @@ def main():
     event_iterator = iter(event_stream)
 
     event1 = next(event_iterator)
-    print(f"Event {event1['event_id']}: Player {event1['player']} "
-          f"(level {event1['level']}) {event1['action']}")
+    print(
+        f"Event {event1['event_id']}: Player {event1['player']} "
+        f"(level {event1['level']}) {event1['action']}"
+    )
 
     event2 = next(event_iterator)
-    print(f"Event {event2['event_id']}: Player {event2['player']} "
-          f"(level {event2['level']}) {event2['action']}")
+    print(
+        f"Event {event2['event_id']}: Player {event2['player']} "
+        f"(level {event2['level']}) {event2['action']}"
+    )
 
     event3 = next(event_iterator)
-    print(f"Event {event3['event_id']}: Player {event3['player']} "
-          f"(level {event3['level']}) {event3['action']}")
+    print(
+        f"Event {event3['event_id']}: Player {event3['player']} "
+        f"(level {event3['level']}) {event3['action']}"
+    )
 
     print("...")
     print()
@@ -174,13 +186,13 @@ def main():
     for event in analytics_stream:
         total_processed += 1
 
-        if event['level'] >= 10:
+        if event["level"] >= 10:
             high_level_count += 1
 
-        if event['action'] == 'found treasure':
+        if event["action"] == "found treasure":
             treasure_count += 1
 
-        if event['action'] == 'leveled up':
+        if event["action"] == "leveled up":
             levelup_count += 1
 
     end_time = time.time()

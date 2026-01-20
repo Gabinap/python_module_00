@@ -24,6 +24,7 @@ Version:
 
 class GardenError(Exception):
     """Base exception class for all garden-related errors."""
+
     pass
 
 
@@ -117,14 +118,11 @@ def test_custom_errors():
     try:
         check_water_tank(10)
     except WaterError as e:
-        print(f"Caught WaterError: {e.message}")
+        print(f"Caught WaterError: {e}")
     print()
 
     print("Testing catching all garden errors...")
-    errors_to_test = [
-        ("tomato", None),
-        (None, 5)
-    ]
+    errors_to_test = [("tomato", None), (None, 5)]
 
     for plant, water_level in errors_to_test:
         try:
@@ -133,7 +131,7 @@ def test_custom_errors():
             else:
                 check_water_tank(water_level)
         except GardenError as e:
-            print(f"Caught a garden error: {e.message}")
+            print(f"Caught a garden error: {e}")
 
     print("\nAll custom error types work correctly!")
 

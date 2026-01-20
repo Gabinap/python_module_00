@@ -32,32 +32,31 @@ def garden_operations(operation_type):
         KeyError: When a dictionary key is not found
     """
     garden_data = {
-        'tomato': {'water': 5, 'sunlight': 8},
-        'lettuce': {'water': 7, 'sunlight': 6},
-        'carrots': {'water': 4, 'sunlight': 9}
+        "tomato": {"water": 5, "sunlight": 8},
+        "lettuce": {"water": 7, "sunlight": 6},
+        "carrots": {"water": 4, "sunlight": 9},
     }
 
-    if operation_type == 'value':
-
+    if operation_type == "value":
         temperature = int("abc")
         print(f"Temperature: {temperature}")
 
-    elif operation_type == 'division':
+    elif operation_type == "division":
         plants_count = 10
         sections = 0
         plants_per_section = plants_count / sections
         print(f"Plants per section: {plants_per_section}")
 
-    elif operation_type == 'file':
-        with open('missing.txt', 'r') as f:
+    elif operation_type == "file":
+        with open("missing.txt") as f:
             data = f.read()
             print(f"File data: {data}")
 
-    elif operation_type == 'key':
-        plant_info = garden_data['missing_plant']
+    elif operation_type == "key":
+        plant_info = garden_data["missing_plant"]
         print(f"Plant info: {plant_info}")
 
-    elif operation_type == 'multiple':
+    elif operation_type == "multiple":
         user_input = "invalid"
         value = int(user_input)
         print(f"Value: {value}")
@@ -74,40 +73,39 @@ def test_error_types():
 
     print("Testing ValueError...")
     try:
-        garden_operations('value')
+        garden_operations("value")
     except ValueError as e:
         print(f"Caught ValueError: {e}")
     print()
 
     print("Testing ZeroDivisionError...")
     try:
-        garden_operations('division')
+        garden_operations("division")
     except ZeroDivisionError as e:
         print(f"Caught ZeroDivisionError: {e}")
     print()
 
     print("Testing FileNotFoundError...")
     try:
-        garden_operations('file')
+        garden_operations("file")
     except FileNotFoundError:
         print("Caught FileNotFoundError: No such file 'missing.txt'")
     print()
 
     print("Testing KeyError...")
     try:
-        garden_operations('key')
+        garden_operations("key")
     except KeyError as e:
         print(f"Caught KeyError: {e}")
     print()
 
     print("Testing multiple errors together...")
-    error_types = ['value', 'division', 'file', 'key']
+    error_types = ["value", "division", "file", "key"]
 
     for error_type in error_types:
         try:
             garden_operations(error_type)
-        except (ValueError, ZeroDivisionError,
-                FileNotFoundError, KeyError):
+        except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
             print("Caught an error, but program continues!")
 
     print("\nAll error types tested successfully!")

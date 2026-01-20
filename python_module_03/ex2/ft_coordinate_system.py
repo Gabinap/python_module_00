@@ -64,7 +64,7 @@ def parse_coordinates(coord_string):
     x = int(parts[0])
     y = int(parts[1])
     z = int(parts[2])
-    return tuple((x, y, z))
+    return (x, y, z)
 
 
 def main():
@@ -80,9 +80,9 @@ def main():
     print("=== Game Coordinate System ===")
     print()
 
-    position = tuple((10, 20, 5))
+    position = (10, 20, 5)
     print(f"Position created: {position}")
-    origin = tuple((0, 0, 0))
+    origin = (0, 0, 0)
     dist = calculate_distance(origin, position)
     print(f"Distance between {origin} and {position}: {dist:.2f}")
     print()
@@ -110,7 +110,7 @@ def main():
     print()
 
     print("Unpacking demonstration:")
-    demo_pos = tuple((3, 4, 0))
+    demo_pos = (3, 4, 0)
     x, y, z = demo_pos
     print(f"Player at x={x}, y={y}, z={z}")
     print(f"Coordinates: X={x}, Y={y}, Z={z}")

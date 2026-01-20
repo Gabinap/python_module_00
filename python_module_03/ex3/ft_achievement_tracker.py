@@ -27,12 +27,20 @@ def main():
     print("=== Achievement Tracker System ===")
     print()
 
-    alice_achievements = set(['first_kill', 'level_10', 'treasure_hunter',
-                              'speed_demon'])
-    bob_achievements = set(['first_kill', 'level_10', 'boss_slayer',
-                            'collector'])
-    charlie_achievements = set(['level_10', 'treasure_hunter', 'boss_slayer',
-                                'speed_demon', 'perfectionist'])
+    alice_achievements = {
+        "first_kill",
+        "level_10",
+        "treasure_hunter",
+        "speed_demon",
+    }
+    bob_achievements = {"first_kill", "level_10", "boss_slayer", "collector"}
+    charlie_achievements = {
+        "level_10",
+        "treasure_hunter",
+        "boss_slayer",
+        "speed_demon",
+        "perfectionist",
+    }
 
     print(f"Player alice achievements: {alice_achievements}")
     print(f"Player bob achievements: {bob_achievements}")
@@ -41,14 +49,16 @@ def main():
 
     print("=== Achievement Analytics ===")
 
-    all_achievements = alice_achievements.union(bob_achievements,
-                                                charlie_achievements)
+    all_achievements = alice_achievements.union(
+        bob_achievements, charlie_achievements
+    )
     print(f"All unique achievements: {all_achievements}")
     print(f"Total unique achievements: {len(all_achievements)}")
     print()
 
-    common_all = alice_achievements.intersection(bob_achievements,
-                                                 charlie_achievements)
+    common_all = alice_achievements.intersection(
+        bob_achievements, charlie_achievements
+    )
     print(f"Common to all players: {common_all}")
     print()
 
@@ -65,9 +75,9 @@ def main():
             achievement_counts.add(achievement)
 
     rare = (
-        alice_achievements.difference(bob_achievements, charlie_achievements) |
-        bob_achievements.difference(alice_achievements, charlie_achievements) |
-        charlie_achievements.difference(alice_achievements, bob_achievements)
+        alice_achievements.difference(bob_achievements, charlie_achievements)
+        | bob_achievements.difference(alice_achievements, charlie_achievements)
+        | charlie_achievements.difference(alice_achievements, bob_achievements)
     )
     print(f"Rare achievements (1 player): {rare}")
     print()

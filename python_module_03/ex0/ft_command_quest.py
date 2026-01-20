@@ -17,6 +17,13 @@ import sys
 
 
 def main():
+    """
+    Process and display command-line arguments supplied via sys.argv.
+
+    Prints program name and any user-supplied arguments in a readable
+    format. If no user arguments are provided, an appropriate message
+    is shown.
+    """
     args = sys.argv
     program_name = args[0]
     user_args = args[1:]
