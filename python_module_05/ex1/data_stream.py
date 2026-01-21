@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    data_stream.py                                     :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gabinap <gabinap@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/18 14:56:03 by gabinap           #+#    #+#              #
-#    Updated: 2026/01/20 11:41:37 by gabinap          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 #!/usr/bin/env python3
 """
 Code Nexus - Polymorphic Stream System (Exercise 1).
@@ -114,9 +102,7 @@ class DataStream(ABC):
         pass
 
     def filter_data(
-        self,
-        data_batch: List[Any],
-        criteria: Optional[str] = None
+        self, data_batch: List[Any], criteria: Optional[str] = None
     ) -> List[Any]:
         """
         Filter data batch based on optional criteria.
@@ -168,7 +154,7 @@ class DataStream(ABC):
         return {
             "stream_id": self._stream_id,
             "batches_processed": self._batches_processed,
-            "total_items": self._total_items
+            "total_items": self._total_items,
         }
 
 
@@ -231,8 +217,10 @@ class SensorStream(DataStream):
 
             avg_temp = sum(temps) / len(temps) if temps else 0
 
-            result = (f"Sensor analysis: {readings_count} readings "
-                      f"processed, avg temp: {avg_temp:.1f}°C")
+            result = (
+                f"Sensor analysis: {readings_count} readings "
+                f"processed, avg temp: {avg_temp:.1f}°C"
+            )
             return result
 
         except Exception as e:
@@ -337,8 +325,10 @@ class TransactionStream(DataStream):
 
             self._net_flow += batch_flow
 
-            result = (f"Transaction analysis: {operations_count} operations, "
-                      f"net flow: {batch_flow:+d} units")
+            result = (
+                f"Transaction analysis: {operations_count} operations, "
+                f"net flow: {batch_flow:+d} units"
+            )
             return result
 
         except Exception as e:
@@ -436,8 +426,11 @@ class EventStream(DataStream):
                     batch_errors += 1
                     self._error_count += 1
 
-            error_text = f"{batch_errors} error detected" \
-                if batch_errors == 1 else f"{batch_errors} errors detected"
+            error_text = (
+                f"{batch_errors} error detected"
+                if batch_errors == 1
+                else f"{batch_errors} errors detected"
+            )
 
             if batch_errors > 0:
                 result = f"Event analysis: {events_count} events, {error_text}"
@@ -504,10 +497,7 @@ class StreamProcessor:
         """
         self._streams.append(stream)
 
-    def process_all(
-        self,
-        data_map: Dict[str, List[Any]]
-    ) -> Dict[str, str]:
+    def process_all(self, data_map: Dict[str, List[Any]]) -> Dict[str, str]:
         """
         Process data for all managed streams.
 
@@ -568,19 +558,10 @@ def demonstrate_polymorphism() -> None:
     data_map = {
         "SENSOR_001": [
             {"temp": 22.5, "humidity": 65},
-            {"temp": 23.0, "humidity": 64}
+            {"temp": 23.0, "humidity": 64},
         ],
-        "TRANS_001": [
-            {"buy": 100},
-            {"sell": 150},
-            {"buy": 75},
-            {"buy": 50}
-        ],
-        "EVENT_001": [
-            "login",
-            "logout",
-            "data_update"
-        ]
+        "TRANS_001": [{"buy": 100}, {"sell": 150}, {"buy": 75}, {"buy": 50}],
+        "EVENT_001": ["login", "logout", "data_update"],
     }
 
     # Process all streams polymorphically - ONE CALL!
@@ -589,14 +570,16 @@ def demonstrate_polymorphism() -> None:
     # Display results using direct stream references
     print("\nBatch 1 Results:")
     print(f"- Sensor data: {sensor._total_items} readings processed")
-    print(f"- Transaction data: {transaction._total_items} operations processed")
+    print(
+        f"- Transaction data: {transaction._total_items} operations processed"
+    )
     print(f"- Event data: {event._total_items} events processed")
 
     # Demonstrate filtering capability
     print("\nStream filtering active: High-priority data only")
     high_temp_data = [
         {"temp": 35.0, "humidity": 70},
-        {"temp": 22.0, "humidity": 65}
+        {"temp": 22.0, "humidity": 65},
     ]
     filtered = sensor.filter_data(high_temp_data, criteria="high")
     print(f"Filtered results: {len(filtered)} critical sensor alerts")
@@ -621,19 +604,17 @@ def main() -> None:
     print("Initializing Sensor Stream...")
     print("Stream ID: SENSOR_001, Type: Environmental Data")
     sensor = SensorStream("SENSOR_001")
-    sensor_result = sensor.process_batch([
-        {"temp": 22.5, "humidity": 65, "pressure": 1013}
-    ])
+    sensor_result = sensor.process_batch(
+        [{"temp": 22.5, "humidity": 65, "pressure": 1013}]
+    )
     print(sensor_result)
 
     print("\nInitializing Transaction Stream...")
     print("Stream ID: TRANS_001, Type: Financial Data")
     transaction = TransactionStream("TRANS_001")
-    transaction_result = transaction.process_batch([
-        {"buy": 100},
-        {"sell": 150},
-        {"buy": 75}
-    ])
+    transaction_result = transaction.process_batch(
+        [{"buy": 100}, {"sell": 150}, {"buy": 75}]
+    )
     print(transaction_result)
 
     print("\nInitializing Event Stream...")
@@ -644,8 +625,7 @@ def main() -> None:
 
     demonstrate_polymorphism()
 
-    print("\nAll streams processed successfully. "
-          "Nexus throughput optimal.")
+    print("\nAll streams processed successfully. Nexus throughput optimal.")
 
 
 if __name__ == "__main__":

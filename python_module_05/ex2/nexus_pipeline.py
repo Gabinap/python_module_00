@@ -42,9 +42,9 @@ Author: Code Nexus Stream Engineer
 Version: 1.0
 """
 
-from abc import ABC, abstractmethod
-from typing import Any, List, Dict, Union, Protocol
 import time
+from abc import ABC, abstractmethod
+from typing import Any, Protocol
 
 
 class ProcessingStage(Protocol):
@@ -113,7 +113,7 @@ class ProcessingPipeline(ABC):
             raise ValueError("pipeline_id cannot be empty")
 
         self._pipeline_id: str = pipeline_id
-        self._stages: List[ProcessingStage] = []
+        self._stages: list[ProcessingStage] = []
         self._batches_processed: int = 0
         self._total_time: float = 0.0
         self._error_count: int = 0
@@ -173,7 +173,7 @@ class ProcessingPipeline(ABC):
         return result
 
     @abstractmethod
-    def process(self, data: Any) -> Union[str, Any]:
+    def process(self, data: Any) -> str | Any:
         """
         Process data with format-specific handling.
 
@@ -188,7 +188,7 @@ class ProcessingPipeline(ABC):
         """
         pass
 
-    def get_performance_stats(self) -> Dict[str, Union[str, int, float]]:
+    def get_performance_stats(self) -> dict[str, str | int | float]:
         """
         Get pipeline performance statistics.
 
@@ -201,12 +201,18 @@ class ProcessingPipeline(ABC):
                 - error_count: Number of errors
                 - efficiency: Success rate (0.0 to 1.0)
         """
-        avg_time = (self._total_time / max(self._batches_processed, 1)
-                    if self._batches_processed > 0 else 0.0)
+        avg_time = (
+            self._total_time / max(self._batches_processed, 1)
+            if self._batches_processed > 0
+            else 0.0
+        )
 
         total_attempts = self._batches_processed + self._error_count
-        efficiency = (self._batches_processed / max(total_attempts, 1)
-                      if total_attempts > 0 else 1.0)
+        efficiency = (
+            self._batches_processed / max(total_attempts, 1)
+            if total_attempts > 0
+            else 1.0
+        )
 
         return {
             "pipeline_id": self._pipeline_id,
@@ -214,7 +220,7 @@ class ProcessingPipeline(ABC):
             "total_time": round(self._total_time, 3),
             "avg_time": round(avg_time, 3),
             "error_count": self._error_count,
-            "efficiency": round(efficiency, 2)
+            "efficiency": round(efficiency, 2),
         }
 
 
@@ -228,7 +234,7 @@ class InputStage:
     Implements ProcessingStage protocol via duck typing.
     """
 
-    def process(self, data: Any) -> Dict:
+    def process(self, data: Any) -> dict:
         """
         Validate and parse input data.
 
@@ -255,7 +261,7 @@ class InputStage:
         return {
             "stage": "input",
             "validated": validated,
-            "status": "validated"
+            "status": "validated",
         }
 
 
@@ -269,7 +275,7 @@ class TransformStage:
     Implements ProcessingStage protocol via duck typing.
     """
 
-    def process(self, data: Any) -> Dict:
+    def process(self, data: Any) -> dict:
         """
         Transform and enrich data.
 
@@ -295,14 +301,14 @@ class TransformStage:
         transformed = {
             "original": raw,
             "processed": True,
-            "transformation": "enriched"
+            "transformation": "enriched",
         }
 
         return {
             "stage": "transform",
             "transformed": transformed,
             "metadata": "enriched with validation",
-            "status": "transformed"
+            "status": "transformed",
         }
 
 
@@ -427,7 +433,7 @@ class CSVAdapter(ProcessingPipeline):
         """
         # CSV-specific handling
         if isinstance(data, str):
-            rows = [row.strip() for row in data.split('\n') if row.strip()]
+            rows = [row.strip() for row in data.split("\n") if row.strip()]
             csv_data = {"rows": rows, "count": len(rows)}
         elif isinstance(data, list):
             csv_data = {"rows": data, "count": len(data)}
@@ -486,13 +492,13 @@ class StreamAdapter(ProcessingPipeline):
             stream_data = {
                 "stream_items": data,
                 "count": len(data),
-                "type": "batch"
+                "type": "batch",
             }
         else:
             stream_data = {
                 "stream_items": [data],
                 "count": 1,
-                "type": "single"
+                "type": "single",
             }
 
         self._stream_count += stream_data["count"]
@@ -507,8 +513,10 @@ class StreamAdapter(ProcessingPipeline):
             return result
         else:
             count = stream_data["count"]
-            return (f"Stream Pipeline Result: {count} items "
-                    f"aggregated and filtered")
+            return (
+                f"Stream Pipeline Result: {count} items "
+                f"aggregated and filtered"
+            )
 
 
 class NexusManager:
@@ -526,8 +534,8 @@ class NexusManager:
 
     def __init__(self) -> None:
         """Initialize the Nexus manager with empty pipeline list."""
-        self._pipelines: List[ProcessingPipeline] = []
-        self._pipeline_map: Dict[str, ProcessingPipeline] = {}
+        self._pipelines: list[ProcessingPipeline] = []
+        self._pipeline_map: dict[str, ProcessingPipeline] = {}
 
     def add_pipeline(self, pipeline: ProcessingPipeline) -> None:
         """
@@ -539,11 +547,7 @@ class NexusManager:
         self._pipelines.append(pipeline)
         self._pipeline_map[pipeline._pipeline_id] = pipeline
 
-    def process_chain(
-        self,
-        initial_data: Any,
-        pipeline_ids: List[str]
-    ) -> Any:
+    def process_chain(self, initial_data: Any, pipeline_ids: list[str]) -> Any:
         """
         Chain multiple pipelines sequentially.
 
@@ -572,20 +576,23 @@ class NexusManager:
             result = pipeline.process(result)
 
         stage_count = len(pipeline_ids)
-        print(f"Chain result: Data processed through "
-              f"{stage_count}-stage pipeline")
+        print(
+            f"Chain result: Data processed through "
+            f"{stage_count}-stage pipeline"
+        )
 
         return result
 
-    def get_all_stats(self) -> List[Dict[str, Union[str, int, float]]]:
+    def get_all_stats(self) -> list[dict[str, str | int | float]]:
         """
         Get performance statistics for all pipelines.
 
         Returns:
             List of statistics dictionaries for each pipeline
         """
-        return [pipeline.get_performance_stats()
-                for pipeline in self._pipelines]
+        return [
+            pipeline.get_performance_stats() for pipeline in self._pipelines
+        ]
 
 
 def demonstrate_pipeline_creation() -> None:
@@ -621,7 +628,7 @@ def demonstrate_pipeline_creation() -> None:
     csv_pipeline.add_stage(OutputStage())
 
     csv_data = "user,action,timestamp"
-    print(f"Input: \"{csv_data}\"")
+    print(f'Input: "{csv_data}"')
     print("Transform: Parsed and structured data")
     csv_pipeline.process(csv_data)
     print("Output: User activity logged: 1 actions processed")
@@ -693,17 +700,16 @@ def main() -> None:
 
     # Demonstrate pipeline chaining
     initial_data = {"raw": "data"}
-    manager.process_chain(
-        initial_data,
-        ["JSON_001", "CSV_001", "STREAM_001"]
-    )
+    manager.process_chain(initial_data, ["JSON_001", "CSV_001", "STREAM_001"])
 
     # Calculate and display performance
     all_stats = manager.get_all_stats()
     avg_efficiency = sum(s["efficiency"] for s in all_stats) / len(all_stats)
 
-    print(f"Performance: {int(avg_efficiency * 100)}% efficiency, "
-          f"0.2s total processing time")
+    print(
+        f"Performance: {int(avg_efficiency * 100)}% efficiency, "
+        f"0.2s total processing time"
+    )
 
     # Demonstrate error recovery
     print("\n=== Error Recovery Test ===")
@@ -723,4 +729,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
