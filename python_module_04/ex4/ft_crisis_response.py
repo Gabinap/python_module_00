@@ -19,7 +19,7 @@ Version:
 """
 
 
-def crisis_handler(archive_name):
+def crisis_handler(archive_name: str) -> tuple[bool, str, str]:
     """
     Generic crisis handler for archive operations.
     Attempts to access an archive and handles all potential failures
@@ -76,7 +76,7 @@ def crisis_handler(archive_name):
         )
 
 
-def main():
+def main() -> None:
     """
     Tests the crisis response system with various archive scenarios.
     Demonstrates proper error handling and system stability.

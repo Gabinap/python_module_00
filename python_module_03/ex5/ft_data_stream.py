@@ -79,7 +79,7 @@ def filter_high_level(event_stream, min_level):
             yield event
 
 
-def fibonacci_generator(count):
+def fibonacci_generator(count: int) -> Generator[int]:
     """
     Generate Fibonacci sequence.
 

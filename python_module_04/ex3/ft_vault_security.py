@@ -16,7 +16,7 @@ Version:
 """
 
 
-def main():
+def main() -> None:
     """
     Implements vault security protocols using the 'with' statement.
     Demonstrates secure reading and writing operations with automatic

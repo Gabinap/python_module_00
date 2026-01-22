@@ -18,7 +18,7 @@ Version:
 import sys
 
 
-def main():
+def main() -> None:
     """
     Demonstrates the three sacred communication channels of the Archives.
     Collects user input via stdin and routes messages to appropriate streams:

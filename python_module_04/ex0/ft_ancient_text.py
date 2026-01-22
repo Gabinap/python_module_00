@@ -16,7 +16,7 @@ Version:
 """
 
 
-def main():
+def main() -> None:
     """
     Read and display contents from 'ancient_fragment.txt'.
 

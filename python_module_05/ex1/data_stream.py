@@ -41,7 +41,7 @@ Version: 1.0
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, List, Dict, Union, Optional
+from typing import Any
 
 
 class DataStream(ABC):
@@ -86,7 +86,7 @@ class DataStream(ABC):
         self._total_items: int = 0
 
     @abstractmethod
-    def process_batch(self, data_batch: List[Any]) -> str:
+    def process_batch(self, data_batch: list[Any]) -> str:
         """
         Process a batch of data.
 
@@ -102,8 +102,8 @@ class DataStream(ABC):
         pass
 
     def filter_data(
-        self, data_batch: List[Any], criteria: Optional[str] = None
-    ) -> List[Any]:
+        self, data_batch: list[Any], criteria: str | None = None
+    ) -> list[Any]:
         """
         Filter data batch based on optional criteria.
 
@@ -138,7 +138,7 @@ class DataStream(ABC):
         """
         return True
 
-    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+    def get_stats(self) -> dict[str, str | int | float]:
         """
         Get stream processing statistics.
 
@@ -184,7 +184,7 @@ class SensorStream(DataStream):
         self._total_readings: int = 0
         self._temperature_sum: float = 0.0
 
-    def process_batch(self, data_batch: List[Any]) -> str:
+    def process_batch(self, data_batch: list[Any]) -> str:
         """
         Process a batch of sensor readings.
 
@@ -247,7 +247,7 @@ class SensorStream(DataStream):
 
         return False
 
-    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+    def get_stats(self) -> dict[str, str | int | float]:
         """
         Get sensor stream statistics.
 
@@ -291,7 +291,7 @@ class TransactionStream(DataStream):
         self._total_operations: int = 0
         self._net_flow: int = 0
 
-    def process_batch(self, data_batch: List[Any]) -> str:
+    def process_batch(self, data_batch: list[Any]) -> str:
         """
         Process a batch of financial transactions.
 
@@ -355,7 +355,7 @@ class TransactionStream(DataStream):
 
         return False
 
-    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+    def get_stats(self) -> dict[str, str | int | float]:
         """
         Get transaction stream statistics.
 
@@ -396,7 +396,7 @@ class EventStream(DataStream):
         self._total_events: int = 0
         self._error_count: int = 0
 
-    def process_batch(self, data_batch: List[Any]) -> str:
+    def process_batch(self, data_batch: list[Any]) -> str:
         """
         Process a batch of system events.
 
@@ -458,7 +458,7 @@ class EventStream(DataStream):
 
         return False
 
-    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+    def get_stats(self) -> dict[str, str | int | float]:
         """
         Get event stream statistics.
 
@@ -486,7 +486,7 @@ class StreamProcessor:
 
     def __init__(self) -> None:
         """Initialize the stream processor with empty stream list."""
-        self._streams: List[DataStream] = []
+        self._streams: list[DataStream] = []
 
     def add_stream(self, stream: DataStream) -> None:
         """
@@ -497,7 +497,7 @@ class StreamProcessor:
         """
         self._streams.append(stream)
 
-    def process_all(self, data_map: Dict[str, List[Any]]) -> Dict[str, str]:
+    def process_all(self, data_map: dict[str, list[Any]]) -> dict[str, str]:
         """
         Process data for all managed streams.
 
@@ -517,7 +517,7 @@ class StreamProcessor:
 
         return results
 
-    def get_all_stats(self) -> List[Dict[str, Union[str, int, float]]]:
+    def get_all_stats(self) -> list[dict[str, str | int | float]]:
         """
         Get statistics for all managed streams.
 

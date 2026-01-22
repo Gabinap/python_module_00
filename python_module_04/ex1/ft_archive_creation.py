@@ -16,7 +16,7 @@ Version:
 """
 
 
-def main():
+def main() -> None:
     """
     Simulates the creation of a new archive file in a cyber archive system.
     It writes predefined entries to a new file and handles potential errors.
