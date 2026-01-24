@@ -18,10 +18,7 @@ Version:
 from .Card import Card
 from .CreatureCard import CreatureCard
 
-
-# Define public API
 __all__ = ["Card", "CreatureCard"]
 
-# Package metadata
 __version__ = "1.0"
 __author__ = "gagulhon (@École 42)"

@@ -1,4 +1,4 @@
-"""u
+"""
 DataDeck - Exercise 0: Card Foundation
 Abstract Base Class: Card
 

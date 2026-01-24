@@ -94,13 +94,11 @@ class CreatureCard(Card):
                 - card_played (str): Name of the creature
                 - mana_used (int): Cost paid to summon
                 - effect (str): Description of the summoning
-                - creature_stats (dict): Attack and health values
         """
         return {
             "card_played": self.name,
             "mana_used": self.cost,
             "effect": "Creature summoned to battlefield",
-            "creature_stats": {"attack": self.attack, "health": self.health},
         }
 
     def attack_target(self, target) -> dict:
@@ -108,11 +106,10 @@ class CreatureCard(Card):
         Attack another creature or player.
 
         Processes combat between this creature and a target. The target
-        can be another creature or a player. Combat follows standard
-        trading card game rules where damage is dealt simultaneously.
+        can be another creature or a player name as string.
 
         Args:
-            target: The target to attack (can be another creature or player)
+            target: The target to attack (creature object or string)
 
         Returns:
             dict: Combat result containing:
@@ -120,28 +117,15 @@ class CreatureCard(Card):
                 - target (str): Name or identifier of target
                 - damage_dealt (int): Damage inflicted
                 - combat_resolved (bool): Whether combat was successful
-                - target_survived (bool): If target is a creature, its status
         """
         target_name = getattr(target, "name", str(target))
 
-        combat_result = {
+        return {
             "attacker": self.name,
             "target": target_name,
             "damage_dealt": self.attack,
             "combat_resolved": True,
         }
-
-        # If target is a creature, check if it survives
-        if hasattr(target, "health"):
-            target_survived = target.health > self.attack
-            combat_result["target_survived"] = target_survived
-            if not target_survived:
-                combat_result["effect"] = f"{target_name} destroyed"
-        else:
-            # Target is a player
-            combat_result["effect"] = f"Player takes {self.attack} damage"
-
-        return combat_result
 
     def get_card_info(self) -> dict:
         """
