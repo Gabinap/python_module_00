@@ -30,8 +30,8 @@ def main() -> None:
 
     print("SECURE EXTRACTION:")
     with open("classified_data.txt") as vault:
-        data = vault.read()
-        print(f"[CLASSIFIED] {data.strip()}")
+        for line in vault:
+            print(f"[CLASSIFIED] {line.strip()}")
 
     print()
 

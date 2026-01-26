@@ -33,7 +33,7 @@ Version: 1.0
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, List
+from typing import Any
 
 
 class DataProcessor(ABC):
@@ -157,8 +157,9 @@ class NumericProcessor(DataProcessor):
             avg = total / len(data) if len(data) > 0 else 0
             self._processed_count += 1
 
-            result = (f"Processed {len(data)} numeric values, "
-                      f"sum={total}, avg={avg}")
+            result = (
+                f"Processed {len(data)} numeric values, sum={total}, avg={avg}"
+            )
             return self.format_output(result)
 
         except Exception as e:
@@ -212,15 +213,16 @@ class TextProcessor(DataProcessor):
             if not self.validate(data):
                 raise ValueError("Invalid text data")
 
-            print(f"Processing data: \"{data}\"")
+            print(f'Processing data: "{data}"')
             print("Validation: Text data verified")
 
             char_count = len(data)
             word_count = len(data.split())
             self._processed_count += 1
 
-            result = (f"Processed text: {char_count} characters, "
-                      f"{word_count} words")
+            result = (
+                f"Processed text: {char_count} characters, {word_count} words"
+            )
             return self.format_output(result)
 
         except Exception as e:
@@ -246,7 +248,7 @@ class LogProcessor(DataProcessor):
     def __init__(self) -> None:
         """Initialize the log processor."""
         self._processed_count: int = 0
-        self._log_levels: List[str] = ["ERROR", "INFO", "WARNING", "DEBUG"]
+        self._log_levels: list[str] = ["ERROR", "INFO", "WARNING", "DEBUG"]
 
     def validate(self, data: Any) -> bool:
         """
@@ -283,7 +285,7 @@ class LogProcessor(DataProcessor):
             if not self.validate(data):
                 raise ValueError("Invalid log entry")
 
-            print(f"Processing data: \"{data}\"")
+            print(f'Processing data: "{data}"')
             print("Validation: Log entry verified")
 
             data_upper = data.upper()
@@ -347,19 +349,17 @@ def demonstrate_polymorphism() -> None:
     print("\n=== Polymorphic Processing Demo ===")
     print("Processing multiple data types through same interface...")
 
-    processors: List[DataProcessor] = [
+    processors: list[DataProcessor] = [
         NumericProcessor(),
         TextProcessor(),
-        LogProcessor()
+        LogProcessor(),
     ]
 
-    test_data: List[Any] = [
-        [1, 2, 3],
-        "Hello World",
-        "INFO: System ready"
-    ]
+    test_data: list[Any] = [[1, 2, 3], "Hello World", "INFO: System ready"]
 
-    for i, (processor, data) in enumerate(zip(processors, test_data), 1):
+    for i, (processor, data) in enumerate(
+        zip(processors, test_data), 1
+    ):
         result = processor.process(data)
         print(f"Result {i}: {result.split('Output: ')[1]}")
 

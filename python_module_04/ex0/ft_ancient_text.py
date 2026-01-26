@@ -26,9 +26,9 @@ def main() -> None:
     try:
         print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
         print()
-        print("Accessing Storage Vault: ancient\\_fragment.txt")
+        print("Accessing Storage Vault: ancient_fragment.txt")
         file = open("ancient_fragment.txt")
-        print("connection established...")
+        print("Connection established...")
         print()
         print("RECOVERED DATA:")
         for line in file:
