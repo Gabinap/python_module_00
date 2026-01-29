@@ -157,6 +157,15 @@ class DataStream(ABC):
             "total_items": self._total_items,
         }
 
+    def get_name(self) -> str:
+        """
+        Get the name of the stream.
+
+        Returns:
+            str: Stream name
+        """
+        return self._stream_id
+
 
 class SensorStream(DataStream):
     """
@@ -203,21 +212,21 @@ class SensorStream(DataStream):
 
             print(f"Processing sensor batch: {data_batch}")
 
-            readings_count = len(data_batch)
+            readings_count: int = len(data_batch)
             self._batches_processed += 1
             self._total_items += readings_count
             self._total_readings += readings_count
 
-            temps = []
+            temps: list[float] = []
             for reading in data_batch:
                 if isinstance(reading, dict) and "temp" in reading:
-                    temp = reading["temp"]
+                    temp: float = reading["temp"]
                     temps.append(temp)
                     self._temperature_sum += temp
 
-            avg_temp = sum(temps) / len(temps) if temps else 0
+            avg_temp: float = sum(temps) / len(temps) if temps else 0
 
-            result = (
+            result: str = (
                 f"Sensor analysis: {readings_count} readings "
                 f"processed, avg temp: {avg_temp:.1f}°C"
             )
@@ -255,7 +264,7 @@ class SensorStream(DataStream):
             Dict with sensor-specific statistics including average
             temperature and total readings
         """
-        stats = super().get_stats()
+        stats: dict[str, str | int | float] = super().get_stats()
         stats["type"] = "Environmental Data"
         stats["total_readings"] = self._total_readings
 
@@ -310,12 +319,12 @@ class TransactionStream(DataStream):
 
             print(f"Processing transaction batch: {data_batch}")
 
-            operations_count = len(data_batch)
+            operations_count: int = len(data_batch)
             self._batches_processed += 1
             self._total_items += operations_count
             self._total_operations += operations_count
 
-            batch_flow = 0
+            batch_flow: int = 0
             for transaction in data_batch:
                 if isinstance(transaction, dict):
                     if "buy" in transaction:
@@ -325,7 +334,7 @@ class TransactionStream(DataStream):
 
             self._net_flow += batch_flow
 
-            result = (
+            result: str = (
                 f"Transaction analysis: {operations_count} operations, "
                 f"net flow: {batch_flow:+d} units"
             )
@@ -349,8 +358,8 @@ class TransactionStream(DataStream):
             return False
 
         if criteria == "large":
-            buy_val = data.get("buy", 0)
-            sell_val = data.get("sell", 0)
+            buy_val: int = data.get("buy", 0)
+            sell_val: int = data.get("sell", 0)
             return max(buy_val, sell_val) > 100
 
         return False
@@ -363,7 +372,7 @@ class TransactionStream(DataStream):
             Dict with transaction-specific statistics including net flow
             and total operations
         """
-        stats = super().get_stats()
+        stats: dict[str, str | int | float] = super().get_stats()
         stats["type"] = "Financial Data"
         stats["total_operations"] = self._total_operations
         stats["net_flow"] = self._net_flow
@@ -415,23 +424,24 @@ class EventStream(DataStream):
 
             print(f"Processing event batch: {data_batch}")
 
-            events_count = len(data_batch)
+            events_count: int = len(data_batch)
             self._batches_processed += 1
             self._total_items += events_count
             self._total_events += events_count
 
-            batch_errors = 0
+            batch_errors: int = 0
             for event in data_batch:
                 if isinstance(event, str) and "error" in event.lower():
                     batch_errors += 1
                     self._error_count += 1
 
-            error_text = (
+            error_text: str = (
                 f"{batch_errors} error detected"
                 if batch_errors == 1
                 else f"{batch_errors} errors detected"
             )
 
+            result: str
             if batch_errors > 0:
                 result = f"Event analysis: {events_count} events, {error_text}"
             else:
@@ -465,7 +475,7 @@ class EventStream(DataStream):
         Returns:
             Dict with event-specific statistics including error count
         """
-        stats = super().get_stats()
+        stats: dict[str, str | int | float] = super().get_stats()
         stats["type"] = "System Events"
         stats["total_events"] = self._total_events
         stats["error_count"] = self._error_count
@@ -507,12 +517,12 @@ class StreamProcessor:
         Returns:
             Dict mapping stream IDs to processing results
         """
-        results = {}
+        results: dict[str, str] = {}
 
         for stream in self._streams:
-            stream_data = data_map.get(stream._stream_id, [])
+            stream_data: list[Any] = data_map.get(stream._stream_id, [])
             if stream_data:
-                result = stream.process_batch(stream_data)
+                result: str = stream.process_batch(stream_data)
                 results[stream._stream_id] = result
 
         return results
@@ -544,28 +554,36 @@ def demonstrate_polymorphism() -> None:
     print("Processing mixed stream types through unified interface...")
 
     # Create individual streams
-    sensor = SensorStream("SENSOR_001")
-    transaction = TransactionStream("TRANS_001")
-    event = EventStream("EVENT_001")
+    sensor: SensorStream = SensorStream("SENSOR_001")
+    sensorname: str = sensor.get_name()
+    transaction: TransactionStream = TransactionStream("TRANS_001")
+    transactionname: str = transaction.get_name()
+    event: EventStream = EventStream("EVENT_001")
+    eventname: str = event.get_name()
 
     # Add them to processor for polymorphic handling
-    processor = StreamProcessor()
+    processor: StreamProcessor = StreamProcessor()
     processor.add_stream(sensor)
     processor.add_stream(transaction)
     processor.add_stream(event)
 
     # Prepare data for all streams
-    data_map = {
-        "SENSOR_001": [
+    data_map: dict[str, list[Any]] = {
+        sensorname: [
             {"temp": 22.5, "humidity": 65},
             {"temp": 23.0, "humidity": 64},
         ],
-        "TRANS_001": [{"buy": 100}, {"sell": 150}, {"buy": 75}, {"buy": 50}],
-        "EVENT_001": ["login", "logout", "data_update"],
+        transactionname: [
+            {"buy": 100},
+            {"sell": 150},
+            {"buy": 75},
+            {"buy": 50},
+        ],
+        eventname: ["login", "logout", "data_update"],
     }
 
     # Process all streams polymorphically - ONE CALL!
-    results = processor.process_all(data_map)
+    _ = processor.process_all(data_map)
 
     # Display results using direct stream references
     print("\nBatch 1 Results:")
@@ -577,11 +595,11 @@ def demonstrate_polymorphism() -> None:
 
     # Demonstrate filtering capability
     print("\nStream filtering active: High-priority data only")
-    high_temp_data = [
+    high_temp_data: list[dict[str, float]] = [
         {"temp": 35.0, "humidity": 70},
         {"temp": 22.0, "humidity": 65},
     ]
-    filtered = sensor.filter_data(high_temp_data, criteria="high")
+    filtered: list[Any] = sensor.filter_data(high_temp_data, criteria="high")
     print(f"Filtered results: {len(filtered)} critical sensor alerts")
 
 
@@ -603,24 +621,24 @@ def main() -> None:
 
     print("Initializing Sensor Stream...")
     print("Stream ID: SENSOR_001, Type: Environmental Data")
-    sensor = SensorStream("SENSOR_001")
-    sensor_result = sensor.process_batch(
+    sensor: SensorStream = SensorStream("SENSOR_001")
+    sensor_result: str = sensor.process_batch(
         [{"temp": 22.5, "humidity": 65, "pressure": 1013}]
     )
     print(sensor_result)
 
     print("\nInitializing Transaction Stream...")
     print("Stream ID: TRANS_001, Type: Financial Data")
-    transaction = TransactionStream("TRANS_001")
-    transaction_result = transaction.process_batch(
+    transaction: TransactionStream = TransactionStream("TRANS_001")
+    transaction_result: str = transaction.process_batch(
         [{"buy": 100}, {"sell": 150}, {"buy": 75}]
     )
     print(transaction_result)
 
     print("\nInitializing Event Stream...")
     print("Stream ID: EVENT_001, Type: System Events")
-    event = EventStream("EVENT_001")
-    event_result = event.process_batch(["login", "error", "logout"])
+    event: EventStream = EventStream("EVENT_001")
+    event_result: str = event.process_batch(["login", "error", "logout"])
     print(event_result)
 
     demonstrate_polymorphism()

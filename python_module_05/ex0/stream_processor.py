@@ -358,7 +358,7 @@ def demonstrate_polymorphism() -> None:
     test_data: list[Any] = [[1, 2, 3], "Hello World", "INFO: System ready"]
 
     for i, (processor, data) in enumerate(
-        zip(processors, test_data), 1
+        zip(processors, test_data, strict=False), 1
     ):
         result = processor.process(data)
         print(f"Result {i}: {result.split('Output: ')[1]}")
