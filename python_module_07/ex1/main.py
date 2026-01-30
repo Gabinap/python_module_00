@@ -47,19 +47,19 @@ def main():
     )
     deck.add_card(fire_dragon)
 
-    lightning_bolt = SpellCard(
-        name="Lightning Bolt", cost=3, rarity="Common", effect_type="damage"
-    )
-    deck.add_card(lightning_bolt)
-
     mana_crystal = ArtifactCard(
         name="Mana Crystal",
-        cost=2,
+        cost=4,
         rarity="Uncommon",
         durability=5,
         effect="+1 mana per turn",
     )
     deck.add_card(mana_crystal)
+
+    lightning_bolt = SpellCard(
+        name="Lightning Bolt", cost=3, rarity="Common", effect_type="damage"
+    )
+    deck.add_card(lightning_bolt)
 
     # Display deck statistics
     stats = deck.get_deck_stats()

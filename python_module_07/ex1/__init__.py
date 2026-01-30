@@ -17,9 +17,9 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex1.ArtifactCard import ArtifactCard
-from ex1.Deck import Deck
-from ex1.SpellCard import SpellCard
+from .ArtifactCard import ArtifactCard
+from .Deck import Deck
+from .SpellCard import SpellCard
 
 
 __all__ = ["SpellCard", "ArtifactCard", "Deck"]

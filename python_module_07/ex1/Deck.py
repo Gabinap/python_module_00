@@ -24,6 +24,8 @@ from typing import Any
 
 from ex0.Card import Card
 
+from ex1.SpellCard import SpellCard
+
 
 class Deck:
     """
