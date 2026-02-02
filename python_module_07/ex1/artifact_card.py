@@ -21,7 +21,7 @@ Version:
 
 from typing import Any
 
-from ex0.Card import Card
+from ex0.card import Card
 
 
 class ArtifactCard(Card):
@@ -62,10 +62,9 @@ class ArtifactCard(Card):
             TypeError: If durability is not an integer or effect not string
             ValueError: If durability is not positive
         """
-        # Initialize base Card attributes
+
         super().__init__(name, cost, rarity)
 
-        # Validate artifact-specific attributes
         if not isinstance(durability, int):
             raise TypeError("Durability must be an integer")
         if not isinstance(effect, str):

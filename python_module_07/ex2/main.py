@@ -11,7 +11,7 @@ Version:
     1.0 (2025-01-30)
 """
 
-from ex2.EliteCard import EliteCard
+from ex2.elite_card import EliteCard
 
 
 def main() -> None:
@@ -25,7 +25,6 @@ def main() -> None:
     print("=== DataDeck Ability System ===")
     print()
 
-    # Create an elite card with both combat and magic
     elite = EliteCard(
         name="Arcane Warrior",
         cost=6,
@@ -36,21 +35,18 @@ def main() -> None:
         spell_power=4,
     )
 
-    # Show inherited capabilities from all three interfaces
     print("EliteCard capabilities:")
     print("- Card: ['play', 'get_card_info', 'is_playable']")
     print("- Combatable: ['attack', 'defend', 'get_combat_stats']")
     print("- Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
     print()
 
-    # Demonstrate Card interface
     print(f"Playing {elite.name} (Elite Card):")
     game_state = {"current_turn": 1, "player_mana": 10}
     play_result = elite.play(game_state)
     print(f"Play result: {play_result}")
     print()
 
-    # Demonstrate Combatable interface - Combat phase
     print("Combat phase:")
     attack_result = elite.attack("Enemy Goblin")
     print(f"Attack result: {attack_result}")
@@ -60,7 +56,6 @@ def main() -> None:
     print(f"Defense result: {defense_result}")
     print()
 
-    # Demonstrate Magical interface - Magic phase
     print("Magic phase:")
     spell_result = elite.cast_spell("Fireball", ["Enemy1", "Enemy2"])
     print(f"Spell cast: {spell_result}")
@@ -70,7 +65,6 @@ def main() -> None:
     print(f"Mana channel: {mana_result}")
     print()
 
-    # Show comprehensive stats
     print("Combat statistics:")
     print(elite.get_combat_stats())
     print()

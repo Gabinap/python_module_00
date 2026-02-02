@@ -19,7 +19,7 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.CreatureCard import CreatureCard
+from ex0.creature_card import CreatureCard
 
 
 def main() -> None:
@@ -38,36 +38,30 @@ def main() -> None:
     print("Testing Abstract Base Class Design:")
     print()
 
-    # Create Fire Dragon creature
     dragon = CreatureCard(
         name="Fire Dragon", cost=5, rarity="Legendary", attack=7, health=5
     )
 
-    # Display card information
     print("CreatureCard Info:")
     card_info = dragon.get_card_info()
     print(f"{card_info}")
     print()
 
-    # Test playability with sufficient mana
     sufficient_mana = 6
     print(f"Playing Fire Dragon with {sufficient_mana} mana available:")
     print(f"Playable: {dragon.is_playable(sufficient_mana)}")
 
-    # Simulate playing the card
     game_state = {"mana": sufficient_mana, "battlefield": []}
     play_result = dragon.play(game_state)
     print(f"Play result: {play_result}")
     print()
 
-    # Demonstrate combat mechanics
     print("Fire Dragon attacks Goblin Warrior:")
-    # Create target (string representation)
+
     attack_result = dragon.attack_target("Goblin Warrior")
     print(f"Attack result: {attack_result}")
     print()
 
-    # Test playability with insufficient mana
     insufficient_mana = 3
     print(f"Testing insufficient mana ({insufficient_mana} available):")
     print(f"Playable: {dragon.is_playable(insufficient_mana)}")

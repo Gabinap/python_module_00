@@ -21,7 +21,7 @@ Version:
 
 from typing import Any
 
-from ex0.Card import Card
+from ex0.card import Card
 
 
 class SpellCard(Card):
@@ -44,9 +44,7 @@ class SpellCard(Card):
         resolve_effect: Process the spell's effect on targets
     """
 
-    def __init__(
-        self, name: str, cost: int, rarity: str, effect_type: str
-    ):
+    def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
         """
         Initialize a SpellCard with its effect type.
 

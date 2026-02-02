@@ -17,10 +17,10 @@ Version:
 
 from typing import Any
 
-from ex0.Card import Card
+from ex0.card import Card
 
-from ex2.Combatable import Combatable
-from ex2.Magical import Magical
+from ex2.combatable import Combatable
+from ex2.magical import Magical
 
 
 class EliteCard(Card, Combatable, Magical):
@@ -88,10 +88,9 @@ class EliteCard(Card, Combatable, Magical):
             ValueError: If attack, health, defense, or spell_power
                        are not positive integers
         """
-        # Initialize parent Card class
+
         super().__init__(name, cost, rarity)
 
-        # Validate combat attributes
         if attack <= 0:
             raise ValueError("Attack must be positive")
         if health <= 0:
@@ -101,14 +100,12 @@ class EliteCard(Card, Combatable, Magical):
         if spell_power <= 0:
             raise ValueError("Spell power must be positive")
 
-        # Combat attributes
         self.attack_power: int = attack
         self.max_health: int = health
         self.health: int = health
         self.defense: int = defense
 
-        # Magical attributes
-        self.max_mana: int = 10  # Standard mana pool
+        self.max_mana: int = 10
         self.current_mana: int = 10
         self.spell_power: int = spell_power
         self.known_spells: list[str] = [
@@ -192,11 +189,9 @@ class EliteCard(Card, Combatable, Magical):
         if incoming_damage < 0:
             raise ValueError("Incoming damage cannot be negative")
 
-        # Calculate damage reduction
         damage_blocked = min(self.defense, incoming_damage)
         damage_taken = max(0, incoming_damage - self.defense)
 
-        # Update health
         self.health = max(0, self.health - damage_taken)
 
         return {
@@ -255,12 +250,10 @@ class EliteCard(Card, Combatable, Magical):
         if not targets:
             raise ValueError("Targets list cannot be empty")
 
-        # Mana cost based on spell power
         mana_cost = min(4, self.spell_power)
         actual_cost = min(mana_cost, self.current_mana)
         self.current_mana -= actual_cost
 
-        # Convert targets to names
         target_names = [getattr(t, "name", str(t)) for t in targets]
 
         return {
@@ -291,7 +284,6 @@ class EliteCard(Card, Combatable, Magical):
         if amount <= 0:
             raise ValueError("Amount must be positive")
 
-        # Add mana up to max capacity
         old_mana = self.current_mana
         self.current_mana = min(self.max_mana, self.current_mana + amount)
         actual_gain = self.current_mana - old_mana

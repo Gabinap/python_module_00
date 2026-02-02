@@ -19,11 +19,11 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.CreatureCard import CreatureCard
+from ex0.creature_card import CreatureCard
 
-from ex1.ArtifactCard import ArtifactCard
-from ex1.Deck import Deck
-from ex1.SpellCard import SpellCard
+from ex1.artifact_card import ArtifactCard
+from ex1.deck import Deck
+from ex1.spell_card import SpellCard
 
 
 def main():
@@ -61,25 +61,20 @@ def main():
     )
     deck.add_card(lightning_bolt)
 
-    # Display deck statistics
     stats = deck.get_deck_stats()
     print(f"Deck stats: {stats}")
     print()
 
-    # Shuffle the deck for drawing
     deck.shuffle()
 
-    # Draw and play cards, demonstrating polymorphism
     print("Drawing and playing cards:")
     print()
 
     game_state = {"mana": 10, "battlefield": []}
 
-    # Draw and play all cards
     while len(deck) > 0:
         card = deck.draw_card()
         if card:
-            # Extract card type (remove "Card" suffix from class name)
             card_type = card.__class__.__name__.replace("Card", "")
             print(f"Drew: {card.name} ({card_type})")
             play_result = card.play(game_state)

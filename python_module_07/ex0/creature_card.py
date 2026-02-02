@@ -21,7 +21,7 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.Card import Card
+from ex0.card import Card
 
 
 class CreatureCard(Card):
@@ -61,10 +61,9 @@ class CreatureCard(Card):
             TypeError: If attack or health are not integers
             ValueError: If attack or health are not positive
         """
-        # Initialize base Card attributes
+
         super().__init__(name, cost, rarity)
 
-        # Validate creature-specific attributes
         if not isinstance(attack, int):
             raise TypeError("Attack must be an integer")
         if not isinstance(health, int):

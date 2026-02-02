@@ -22,9 +22,9 @@ Version:
 import random
 from typing import Any
 
-from ex0.Card import Card
+from ex0.card import Card
 
-from ex1.SpellCard import SpellCard
+from ex1.spell_card import SpellCard
 
 
 class Deck:
@@ -175,7 +175,6 @@ class Deck:
             if card.__class__.__name__ == "ArtifactCard"
         )
 
-        # Calculate average mana cost
         total_cost = sum(card.cost for card in self.cards)
         avg_cost = total_cost / total_cards
 
