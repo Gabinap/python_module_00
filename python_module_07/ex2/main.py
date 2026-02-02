@@ -42,16 +42,14 @@ def main() -> None:
     print()
 
     print(f"Playing {elite.name} (Elite Card):")
-    game_state = {"current_turn": 1, "player_mana": 10}
-    play_result = elite.play(game_state)
-    print(f"Play result: {play_result}")
+    # game_state = {"current_turn": 1, "player_mana": 10}
+    # play_result = elite.play(game_state)
+    # print(f"Play result: {play_result}")
     print()
 
     print("Combat phase:")
     attack_result = elite.attack("Enemy Goblin")
     print(f"Attack result: {attack_result}")
-    print()
-
     defense_result = elite.defend(5)
     print(f"Defense result: {defense_result}")
     print()
@@ -59,19 +57,17 @@ def main() -> None:
     print("Magic phase:")
     spell_result = elite.cast_spell("Fireball", ["Enemy1", "Enemy2"])
     print(f"Spell cast: {spell_result}")
-    print()
-
     mana_result = elite.channel_mana(3)
     print(f"Mana channel: {mana_result}")
     print()
 
-    print("Combat statistics:")
-    print(elite.get_combat_stats())
-    print()
+    # print("Combat statistics:")
+    # print(elite.get_combat_stats())
+    # print()
 
-    print("Magic statistics:")
-    print(elite.get_magic_stats())
-    print()
+    # print("Magic statistics:")
+    # print(elite.get_magic_stats())
+    # print()
 
     print("Multiple interface implementation successful!")
 
