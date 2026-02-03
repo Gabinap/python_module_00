@@ -21,7 +21,7 @@ Version:
 
 from typing import Any
 
-from ex0.card import Card
+from ex0.Card import Card
 
 
 class SpellCard(Card):

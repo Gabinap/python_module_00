@@ -16,9 +16,9 @@ Version:
     1.0 (2025-01-30)
 """
 
-from ex4.rankable import Rankable
-from ex4.tournament_card import TournamentCard
-from ex4.tournament_platform import TournamentPlatform
+from ex4.Rankable import Rankable
+from ex4.TournamentCard import TournamentCard
+from ex4.TournamentPlatform import TournamentPlatform
 
 
 __all__ = ["Rankable", "TournamentCard", "TournamentPlatform"]

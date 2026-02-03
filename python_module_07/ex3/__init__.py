@@ -18,11 +18,11 @@ Version:
     1.0 (2025-01-30)
 """
 
-from ex3.aggressive_strategy import AggressiveStrategy
-from ex3.card_factory import CardFactory
-from ex3.fantasy_card_factory import FantasyCardFactory
-from ex3.game_engine import GameEngine
-from ex3.game_strategy import GameStrategy
+from ex3.AggressiveStrategy import AggressiveStrategy
+from ex3.CardFactory import CardFactory
+from ex3.FantasyCardFactory import FantasyCardFactory
+from ex3.GameEngine import GameEngine
+from ex3.GameStrategy import GameStrategy
 
 
 __all__ = [

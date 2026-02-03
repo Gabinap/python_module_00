@@ -19,7 +19,7 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.creature_card import CreatureCard
+from ex0.CreatureCard import CreatureCard
 
 
 def main() -> None:

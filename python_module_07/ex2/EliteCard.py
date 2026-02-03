@@ -17,10 +17,10 @@ Version:
 
 from typing import Any
 
-from ex0.card import Card
+from ex0.Card import Card
 
-from ex2.combatable import Combatable
-from ex2.magical import Magical
+from ex2.Combatable import Combatable
+from ex2.Magical import Magical
 
 
 class EliteCard(Card, Combatable, Magical):

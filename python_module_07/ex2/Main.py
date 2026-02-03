@@ -11,7 +11,7 @@ Version:
     1.0 (2025-01-30)
 """
 
-from ex2.elite_card import EliteCard
+from ex2.EliteCard import EliteCard
 
 
 def main() -> None:

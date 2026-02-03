@@ -15,8 +15,8 @@ Version:
     1.0 (2025-01-23)
 """
 
-from .card import Card
-from .creature_card import CreatureCard
+from .Card import Card
+from .CreatureCard import CreatureCard
 
 
 __all__ = ["Card", "CreatureCard"]

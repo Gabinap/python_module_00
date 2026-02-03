@@ -17,7 +17,7 @@ Version:
 import random
 from typing import Any
 
-from ex4.tournament_card import TournamentCard
+from ex4.TournamentCard import TournamentCard
 
 
 class TournamentPlatform:

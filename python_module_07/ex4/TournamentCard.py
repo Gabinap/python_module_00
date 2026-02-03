@@ -17,10 +17,10 @@ Version:
 
 from typing import Any
 
-from ex0.card import Card
-from ex2.combatable import Combatable
+from ex0.Card import Card
+from ex2.Combatable import Combatable
 
-from ex4.rankable import Rankable
+from ex4.Rankable import Rankable
 
 
 class TournamentCard(Card, Combatable, Rankable):

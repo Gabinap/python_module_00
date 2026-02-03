@@ -19,11 +19,11 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.creature_card import CreatureCard
+from ex0.CreatureCard import CreatureCard
 
-from ex1.artifact_card import ArtifactCard
-from ex1.deck import Deck
-from ex1.spell_card import SpellCard
+from ex1.ArtifactCard import ArtifactCard
+from ex1.Deck import Deck
+from ex1.SpellCard import SpellCard
 
 
 def main():

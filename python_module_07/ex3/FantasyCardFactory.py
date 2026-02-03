@@ -17,12 +17,12 @@ Version:
 import random
 from typing import Any
 
-from ex0.card import Card
-from ex0.creature_card import CreatureCard
-from ex1.artifact_card import ArtifactCard
-from ex1.spell_card import SpellCard
+from ex0.Card import Card
+from ex0.CreatureCard import CreatureCard
+from ex1.ArtifactCard import ArtifactCard
+from ex1.SpellCard import SpellCard
 
-from ex3.card_factory import CardFactory
+from ex3.CardFactory import CardFactory
 
 
 class FantasyCardFactory(CardFactory):

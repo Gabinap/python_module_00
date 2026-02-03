@@ -11,8 +11,8 @@ Version:
     1.0 (2025-01-30)
 """
 
-from ex4.tournament_card import TournamentCard
-from ex4.tournament_platform import TournamentPlatform
+from ex4.TournamentCard import TournamentCard
+from ex4.TournamentPlatform import TournamentPlatform
 
 
 def main() -> None:

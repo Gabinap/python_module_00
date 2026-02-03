@@ -17,8 +17,8 @@ Version:
 
 from typing import Any
 
-from ex3.card_factory import CardFactory
-from ex3.game_strategy import GameStrategy
+from ex3.CardFactory import CardFactory
+from ex3.GameStrategy import GameStrategy
 
 
 class GameEngine:

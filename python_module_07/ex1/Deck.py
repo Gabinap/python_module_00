@@ -22,9 +22,9 @@ Version:
 import random
 from typing import Any
 
-from ex0.card import Card
+from ex0.Card import Card
 
-from ex1.spell_card import SpellCard
+from ex1.SpellCard import SpellCard
 
 
 class Deck:

@@ -21,7 +21,7 @@ Version:
     1.0 (2025-01-23)
 """
 
-from ex0.card import Card
+from ex0.Card import Card
 
 
 class CreatureCard(Card):
