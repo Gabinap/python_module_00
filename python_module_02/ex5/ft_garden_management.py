@@ -32,7 +32,6 @@ class PlantError(GardenError):
 
 class WaterError(GardenError):
     """Exception raised for watering-related problems."""
-
     pass
 
 

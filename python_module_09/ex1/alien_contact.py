@@ -30,11 +30,16 @@ class AlienContact(BaseModel):
     """
 
     contact_id: str = Field(
-        ..., min_length=5, max_length=15, description="Unique contact identifier"
+        ..., min_length=5, max_length=15,
+        description="Unique contact identifier"
     )
-    timestamp: datetime = Field(..., description="Date and time of contact")
+    timestamp: datetime = Field(
+        ...,
+        description="Date and time of contact"
+    )
     location: str = Field(
-        ..., min_length=3, max_length=100, description="Location of contact"
+        ..., min_length=3, max_length=100,
+        description="Location of contact"
     )
     contact_type: ContactType = Field(..., description="Type of contact")
     signal_strength: float = Field(
@@ -43,7 +48,10 @@ class AlienContact(BaseModel):
     duration_minutes: int = Field(
         ..., ge=1, le=1440, description="Duration in minutes (max 24 hours)"
     )
-    witness_count: int = Field(..., ge=1, le=100, description="Number of witnesses")
+    witness_count: int = Field(
+        ..., ge=1, le=100,
+        description="Number of witnesses"
+    )
     message_received: Optional[str] = Field(
         default=None, max_length=500, description="Optional received message"
     )
