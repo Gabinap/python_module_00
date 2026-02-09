@@ -1,5 +1,7 @@
 """Exercise 2: Space Crew Management - Nested models and complex validation."""
 
+from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
 from typing import List
@@ -68,7 +70,7 @@ class SpaceMission(BaseModel):
     )
 
     @model_validator(mode="after")
-    def validate_mission_rules(self) -> "SpaceMission":
+    def validate_mission_rules(self) -> SpaceMission:
         """Validate mission-level business rules."""
         # Rule 1: Mission ID must start with "M"
         if not self.mission_id.startswith("M"):
