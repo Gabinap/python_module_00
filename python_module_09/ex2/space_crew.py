@@ -154,7 +154,10 @@ def main() -> None:
     print(f"  Crew size: {len(mission.crew)}")
     print("  Crew members:")
     for member in mission.crew:
-        print(f"  - {member.name} ({member.rank.value}) - {member.specialization}")
+        print(
+            f"  - {member.name} ({member.rank.value}) - "
+            f"{member.specialization}"
+        )
 
     print()
     print("=" * 40)
