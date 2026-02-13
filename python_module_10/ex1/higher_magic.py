@@ -1,18 +1,21 @@
-def spell_combiner(spell1: callable, spell2: callable) -> callable:
+from typing import Callable
+
+
+def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
     """Combine two spells into one that returns a tuple of both results."""
     def combined(*args, **kwargs):
         return (spell1(*args, **kwargs), spell2(*args, **kwargs))
     return combined
 
 
-def power_amplifier(base_spell: callable, multiplier: int) -> callable:
+def power_amplifier(base_spell: Callable, multiplier: int) -> Callable:
     """Amplify a spell's numerical result by a multiplier."""
     def amplified(*args, **kwargs):
         return base_spell(*args, **kwargs) * multiplier
     return amplified
 
 
-def conditional_caster(condition: callable, spell: callable) -> callable:
+def conditional_caster(condition: Callable, spell: Callable) -> Callable:
     """Cast spell only if condition returns True."""
     def caster(*args, **kwargs):
         if condition(*args, **kwargs):
@@ -21,7 +24,7 @@ def conditional_caster(condition: callable, spell: callable) -> callable:
     return caster
 
 
-def spell_sequence(spells: list[callable]) -> callable:
+def spell_sequence(spells: list[Callable]) -> Callable:
     """Create a function that casts all spells in order."""
     def sequence(*args, **kwargs):
         return [spell(*args, **kwargs) for spell in spells]

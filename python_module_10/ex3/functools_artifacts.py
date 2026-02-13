@@ -1,5 +1,6 @@
 import functools
 import operator
+from typing import Callable
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
@@ -13,7 +14,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     return functools.reduce(operations[operation], spells)
 
 
-def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
     """Create partial applications for different element enchantments."""
     return {
         'fire_enchant': functools.partial(
@@ -38,7 +39,7 @@ def memoized_fibonacci(n: int) -> int:
     return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 
 
-def spell_dispatcher() -> callable:
+def spell_dispatcher() -> Callable:
     """Create a single dispatch spell system."""
     @functools.singledispatch
     def cast(spell):
