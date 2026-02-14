@@ -1,9 +1,9 @@
 import functools
 import time
-from typing import Callable
+from typing import Any, Callable
 
 
-def spell_timer(func: Callable) -> Callable:
+def spell_timer(func: Callable[..., Any]) -> Callable[..., Any]:
     """Decorator that measures function execution time."""
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -16,9 +16,9 @@ def spell_timer(func: Callable) -> Callable:
     return wrapper
 
 
-def power_validator(min_power: int) -> Callable:
+def power_validator(min_power: int) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """Decorator factory that validates power levels."""
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             if 'power' in kwargs:
@@ -35,9 +35,9 @@ def power_validator(min_power: int) -> Callable:
     return decorator
 
 
-def retry_spell(max_attempts: int) -> Callable:
+def retry_spell(max_attempts: int) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """Decorator that retries failed spells."""
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             for attempt in range(1, max_attempts + 1):

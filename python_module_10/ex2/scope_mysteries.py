@@ -1,7 +1,7 @@
-from typing import Callable
+from typing import Any, Callable
 
 
-def mage_counter() -> Callable:
+def mage_counter() -> Callable[[], int]:
     """Create a counting closure that tracks call count."""
     count = 0
 
@@ -12,7 +12,7 @@ def mage_counter() -> Callable:
     return counter
 
 
-def spell_accumulator(initial_power: int) -> Callable:
+def spell_accumulator(initial_power: int) -> Callable[[int], int]:
     """Create a power accumulator starting from initial_power."""
     total = initial_power
 
@@ -23,14 +23,14 @@ def spell_accumulator(initial_power: int) -> Callable:
     return accumulate
 
 
-def enchantment_factory(enchantment_type: str) -> Callable:
+def enchantment_factory(enchantment_type: str) -> Callable[[str], str]:
     """Create enchantment functions with a fixed enchantment type."""
     def enchant(item_name: str) -> str:
         return f"{enchantment_type} {item_name}"
     return enchant
 
 
-def memory_vault() -> dict[str, Callable]:
+def memory_vault() -> dict[str, Callable[..., Any]]:
     """Create a memory management system using closures."""
     memories = {}
 
