@@ -14,7 +14,9 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     return functools.reduce(operations[operation], spells)
 
 
-def partial_enchanter(base_enchantment: Callable[..., Any]) -> dict[str, Callable[..., Any]]:
+def partial_enchanter(
+                        base_enchantment: Callable[..., Any]
+                        ) -> dict[str, Callable[..., Any]]:
     """Create partial applications for different element enchantments."""
     return {
         'fire_enchant': functools.partial(

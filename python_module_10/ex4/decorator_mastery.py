@@ -16,7 +16,9 @@ def spell_timer(func: Callable[..., Any]) -> Callable[..., Any]:
     return wrapper
 
 
-def power_validator(min_power: int) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+def power_validator(
+        min_power: int
+        ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """Decorator factory that validates power levels."""
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
@@ -35,7 +37,9 @@ def power_validator(min_power: int) -> Callable[[Callable[..., Any]], Callable[.
     return decorator
 
 
-def retry_spell(max_attempts: int) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+def retry_spell(
+        max_attempts: int
+        ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """Decorator that retries failed spells."""
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @functools.wraps(func)
